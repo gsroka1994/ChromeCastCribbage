@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cs407.chromecastcribbage.Count_Screen_Activity"
+    tools:showIn="@layout/activity_count__screen_"
+    android:background="@drawable/oak1"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.83"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/turnText"
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:text="Your Hand Count"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/countString"
+            android:layout_width="436dp"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/totalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Total"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cardOneButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:text="Card 1" />
+
+        <Button
+            android:id="@+id/cardTwoButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:text="Card 2" />
+
+        <Button
+            android:id="@+id/cardThreeButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:text="Card 3" />
+
+        <Button
+            android:id="@+id/cardFourButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:text="Card 4" />
+
+        <Button
+            android:id="@+id/turnCardButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:text="Turn Card" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

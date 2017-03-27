@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cs407.chromecastcribbage.Discard_Activity"
+    android:background="@drawable/oak1"
+    tools:showIn="@layout/activity_discard_">
+
+    <TextView
+        android:id="@+id/discardMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:text="Select two cards for the crib"
+        android:textSize="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="50dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.00">
+
+<!--        <ImageButton
+            android:id="@+id/cardOneButton"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:text="Card 1" />-->
+
+        <Button
+            android:id="@+id/cardOneButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 1" />
+
+        <Button
+            android:id="@+id/cardTwoButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 2" />
+
+        <Button
+            android:id="@+id/cardThreeButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 3" />
+
+        <Button
+            android:id="@+id/cardFourButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 4" />
+
+        <Button
+            android:id="@+id/cardFiveButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 5" />
+
+        <Button
+            android:id="@+id/cardSixButton"
+            android:layout_width="95dp"
+            android:layout_height="150dp"
+            android:onClick="addCardToCrib"
+            android:text="Card 6" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="discardCards"
+        android:text="Submit" />
+
+</LinearLayout>

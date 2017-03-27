@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cs407.chromecastcribbage.Pegging_Activity"
+    tools:showIn="@layout/activity_pegging_"
+    android:background="@drawable/oak1"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/turnText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Its USERNAME's turn to select a card for pegging"
+        android:textSize="24dp"
+        android:layout_weight="0.05" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cardOneButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:onClick="playCard"
+            android:text="Card 1" />
+
+        <Button
+            android:id="@+id/cardTwoButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:onClick="playCard"
+            android:text="Card 2" />
+
+        <Button
+            android:id="@+id/cardThreeButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:onClick="playCard"
+            android:text="Card 3" />
+
+        <Button
+            android:id="@+id/cardFourButton"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:onClick="playCard"
+            android:text="Card 4" />
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/turnCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="turnCard" />
+
+
+</LinearLayout>

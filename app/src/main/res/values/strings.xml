@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChromecastCribbage</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_setup_">Setup_Activity</string>
+    <string name="title_activity_waiting_2_">Waiting_2_Activity</string>
+    <string name="title_activity_pegging_">Pegging_Activity</string>
+    <string name="title_activity_deal_">Deal_Activity</string>
+    <string name="title_activity_discard_">Discard_Activity</string>
+    <string name="title_activity_count__screen_">Count_Screen_Activity</string>
+</resources>
