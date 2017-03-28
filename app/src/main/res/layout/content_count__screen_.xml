@@ -24,6 +24,7 @@
             android:layout_width="88dp"
             android:layout_height="match_parent"
             android:text="Your Hand Count"
+            android:textColor="#212121"
             android:textSize="24dp" />
 
         <TextView
@@ -31,6 +32,7 @@
             android:layout_width="436dp"
             android:layout_height="match_parent"
             android:textSize="18dp"
+            android:textColor="#212121"
             android:text="TextView" />
 
         <TextView
@@ -38,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
+            android:textColor="#212121"
             android:text="Total"
             android:textSize="24dp" />
 

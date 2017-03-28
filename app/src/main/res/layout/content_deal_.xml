@@ -19,6 +19,7 @@
         android:paddingBottom="35dp"
         android:gravity="center"
         android:textSize="40dp"
+        android:textColor="#212121"
         android:text="You drew the lowest card!  Its your deal when you are ready!" />
 
     <Button

@@ -19,6 +19,7 @@
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
+        android:textColor="#212121"
         android:text="How Many Players?" />
 
     <Button
