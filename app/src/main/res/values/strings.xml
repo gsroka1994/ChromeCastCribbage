@@ -7,4 +7,5 @@
     <string name="title_activity_deal_">Deal_Activity</string>
     <string name="title_activity_discard_">Discard_Activity</string>
     <string name="title_activity_count__screen_">Count_Screen_Activity</string>
+    <string name="title_activity_find__dealer_">Find_Dealer_Activity</string>
 </resources>

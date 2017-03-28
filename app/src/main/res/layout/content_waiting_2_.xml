@@ -18,6 +18,7 @@
         android:gravity="center"
         android:textSize="30dp"
         android:paddingTop="20dp"
+        android:textColor="#212121"
         android:paddingBottom="50dp"
         android:text="Setting Up Game" />
 
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="24dp"
+        android:textColor="#212121"
         android:text="Player 1:" />
 
     <Space
@@ -37,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="24dp"
+        android:textColor="#212121"
         android:text="Player 2: (Waiting for Player)" />
 
     <Space
@@ -48,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="24dp"
+        android:textColor="#212121"
         android:text="Player 3: (Waiting for Player)" />
 
     <Space
@@ -59,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="24dp"
+        android:textColor="#212121"
         android:text="Player 4: (Waiting for Player)" />
 
     <Space

@@ -53,7 +53,7 @@ public class Waiting_2_Activity extends AppCompatActivity {
     }
 
     public void startGame(View view) {
-        Intent intent = new Intent(this, Deal_Activity.class);
+        Intent intent = new Intent(this, Find_Dealer_Activity.class);
         startActivity(intent);
     }
 }

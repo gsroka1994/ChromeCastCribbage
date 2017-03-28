@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Its USERNAME's turn to select a card for pegging"
         android:textSize="24dp"
+        android:textColor="#212121"
         android:layout_weight="0.05" />
 
     <LinearLayout
