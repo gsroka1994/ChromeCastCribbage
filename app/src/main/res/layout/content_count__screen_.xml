@@ -31,7 +31,7 @@
             android:id="@+id/countString"
             android:layout_width="436dp"
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textSize="13dp"
             android:textColor="#212121"
             android:text="TextView" />
 
@@ -53,36 +53,60 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/cardOneButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:text="Card 1" />
+            android:layout_height="150dp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardTwoButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:text="Card 2" />
+            android:layout_height="150dp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardThreeButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:text="Card 3" />
+            android:layout_height="150dp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardFourButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:text="Card 4" />
+            android:layout_height="150dp"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/turnCardButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:text="Turn Card" />
+            android:layout_height="150dp"/>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

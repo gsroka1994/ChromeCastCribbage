@@ -1,5 +1,6 @@
 package cs407.chromecastcribbage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,12 +38,25 @@ public class Count_Screen_Activity extends AppCompatActivity {
         countView = (TextView) findViewById(R.id.countString);
         totalScore = (TextView) findViewById(R.id.totalScore);
 
+        int id;
+        Context context = card1.getContext();
+        id = context.getResources().getIdentifier(prev.getString("card1"), "drawable", context.getPackageName());
+        card1.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(prev.getString("card2"), "drawable", context.getPackageName());
+        card2.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(prev.getString("card3"), "drawable", context.getPackageName());
+        card3.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(prev.getString("card4"), "drawable", context.getPackageName());
+        card4.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(prev.getString("turnCard"), "drawable", context.getPackageName());
+        turnCardButton.setBackgroundResource(id);
+
         //card1.setImageResource(R.drawable.ace_of_clubs);
-        card1.setText(prev.getString("card1"));
+        /*card1.setText(prev.getString("card1"));
         card2.setText(prev.getString("card2"));
         card3.setText(prev.getString("card3"));
         card4.setText(prev.getString("card4"));
-        turnCardButton.setText(prev.getString("turnCard"));
+        turnCardButton.setText(prev.getString("turnCard"));*/
         String countString = prev.getString("countString");
         String[] count = countString.split("Total Score:");
         countView.setText(count[0]);

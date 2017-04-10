@@ -1,5 +1,6 @@
 package cs407.chromecastcribbage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +27,10 @@ public class Pegging_Activity extends AppCompatActivity {
     Boolean yourTurn = true;
     TextView turnText;
     int count = 4;
+    String cardName1;
+    String cardName2;
+    String cardName3;
+    String cardName4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,26 @@ public class Pegging_Activity extends AppCompatActivity {
         card4 = (Button) findViewById(R.id.cardFourButton);
         turnCardButton = (Button) findViewById(R.id.turnCard);
 
+        cardName1 = hand.getCard(0).getFileName();
+        cardName2 = hand.getCard(1).getFileName();
+        cardName3 = hand.getCard(2).getFileName();
+        cardName4 = hand.getCard(3).getFileName();
+
         //card1.setImageResource(R.drawable.ace_of_clubs);
-        card1.setText(hand.getCard(0).toString());
-        card2.setText(hand.getCard(1).toString());
+        int id;
+        Context context = card1.getContext();
+        id = context.getResources().getIdentifier(cardName1, "drawable", context.getPackageName());
+        card1.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(cardName2, "drawable", context.getPackageName());
+        card2.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(cardName3, "drawable", context.getPackageName());
+        card3.setBackgroundResource(id);
+        id = context.getResources().getIdentifier(cardName4, "drawable", context.getPackageName());
+        card4.setBackgroundResource(id);
+
+        /*card2.setText(hand.getCard(1).toString());
         card3.setText(hand.getCard(2).toString());
-        card4.setText(hand.getCard(3).toString());
+        card4.setText(hand.getCard(3).toString());*/
         turnCardButton.setText(turnCard.toString());
 
         turnText = (TextView) findViewById(R.id.turnText);
@@ -113,11 +133,11 @@ public class Pegging_Activity extends AppCompatActivity {
             Toast.makeText(this,countString, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Count_Screen_Activity.class);
-            intent.putExtra("card1", hand.getCard(0).toString());
-            intent.putExtra("card2", hand.getCard(1).toString());
-            intent.putExtra("card3", hand.getCard(2).toString());
-            intent.putExtra("card4", hand.getCard(3).toString());
-            intent.putExtra("turnCard", hand.getCard(4).toString());
+            intent.putExtra("card1", cardName1);
+            intent.putExtra("card2", cardName2);
+            intent.putExtra("card3", cardName3);
+            intent.putExtra("card4", cardName4);
+            intent.putExtra("turnCard", hand.getCard(4).getFileName());
             intent.putExtra("countString", countString);
             startActivity(intent);
         }

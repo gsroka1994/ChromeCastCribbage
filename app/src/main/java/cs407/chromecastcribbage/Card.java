@@ -88,6 +88,24 @@ public class Card {
     }
 
     public String getFileName() {
-        return (getValueAsString() + "_of_" + getSuitAsString() + ".png").toLowerCase();
+
+        String value = getValueAsString();
+        switch (getValueAsString()){
+            case "Ace":
+                value = "1";
+                break;
+            case "Jack":
+                value = "11";
+                break;
+            case "Queen":
+                value = "12";
+                break;
+            case "King":
+                value = "13";
+                break;
+        }
+
+
+        return (getSuitAsString().toLowerCase() + "_" + value.toLowerCase()).toLowerCase();
     }
 }

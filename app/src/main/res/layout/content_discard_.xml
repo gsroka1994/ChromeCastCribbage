@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="50dp"
+        android:paddingBottom="10dp"
         android:orientation="horizontal"
         android:layout_weight="0.00">
 
@@ -36,47 +36,82 @@
             android:layout_height="150dp"
             android:text="Card 1" />-->
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/cardOneButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 1" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardTwoButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 2" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardThreeButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 3" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardFourButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 4" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardFiveButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 5" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardSixButton"
             android:layout_width="95dp"
             android:layout_height="150dp"
-            android:onClick="addCardToCrib"
-            android:text="Card 6" />
+            android:layout_marginTop="20dp"
+            android:onClick="addCardToCrib"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <Button
