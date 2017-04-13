@@ -25,10 +25,12 @@
     <TextView
         android:id="@+id/playerOne"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="24dp"
-        android:textColor="#212121"
-        android:text="Player 1:" />
+        android:layout_height="40dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:gravity="center_vertical"
+        android:textSize="24sp"
+        android:text="   Player 1:" />
 
     <Space
         android:layout_width="match_parent"
@@ -37,10 +39,12 @@
     <TextView
         android:id="@+id/playerTwo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="24dp"
-        android:textColor="#212121"
-        android:text="Player 2: (Waiting for Player)" />
+        android:layout_height="40dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:gravity="center_vertical"
+        android:textSize="24sp"
+        android:text="   Player 2: (Waiting for Player)" />
 
     <Space
         android:layout_width="match_parent"
@@ -49,10 +53,13 @@
     <TextView
         android:id="@+id/playerThree"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="24dp"
-        android:textColor="#212121"
-        android:text="Player 3: (Waiting for Player)" />
+        android:layout_height="40dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:gravity="center_vertical"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        android:text="   Player 3: (Waiting for Player)" />
 
     <Space
         android:layout_width="match_parent"
@@ -61,20 +68,30 @@
     <TextView
         android:id="@+id/playerFour"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="24dp"
-        android:textColor="#212121"
-        android:text="Player 4: (Waiting for Player)" />
+        android:layout_height="40dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:gravity="center_vertical"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        android:text="   Player 4: (Waiting for Player)" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="50dp" />
+
     <Button
         android:id="@+id/startButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/cherry"
+        android:textColor="@color/icons"
+        android:gravity="center"
         android:onClick="startGame"
-        android:text="Start Game" />
+        android:text="Start Game"
+        android:textSize="24sp" />
     <!--
         android:visibility="invisible"
 -->

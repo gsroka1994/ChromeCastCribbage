@@ -70,6 +70,9 @@
             android:label="@string/title_activity_find__dealer_"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <meta-data
+            android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+            android:value="cs407.chromecastcribbage.CastOptionsProvider" />
     </application>
 
 </manifest>

@@ -20,12 +20,17 @@
         android:gravity="center"
         android:textSize="40dp"
         android:textColor="#212121"
-        android:text="You drew the lowest card!  Its your deal when you are ready!" />
+        android:text="Its your deal when you are ready!" />
 
     <Button
         android:id="@+id/dealButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/cherry"
+        android:textColor="@color/icons"
+        android:gravity="center"
         android:textSize="36dp"
         android:onClick="dealCards"
         android:text="DEAL" />

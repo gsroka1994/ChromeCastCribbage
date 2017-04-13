@@ -20,15 +20,15 @@ public class Deal_Activity extends AppCompatActivity {
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
 
-        boolean dealer = true;//TODO: add logic here to get actual dealer
+        String userName = "playerName";
+        String playerName = "playerName";
 
-        if(!dealer){
+        if(playerName != userName){
             Button button = (Button) findViewById(R.id.dealButton);
             button.setVisibility(View.INVISIBLE);
             TextView textView = (TextView) findViewById(R.id.dealText);
-            textView.setText("USERNAMEHERE's card was lowest.  Waiting for them to start dealing.");
+            textView.setText("Waiting for " + userName + " to start dealing.");
         }
-
 
     }
 

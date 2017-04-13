@@ -13,8 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.cast.framework.CastButtonFactory;
+import com.google.android.gms.cast.framework.CastContext;
+
+
 public class Welcome_Activity extends AppCompatActivity {
 
+    private CastContext mCastContext;
+    private MenuItem mediaRouteMenuItem;
     String userName;
 
     @Override
@@ -29,15 +35,21 @@ public class Welcome_Activity extends AppCompatActivity {
 
 
         //TODO: Find names of available chromecasts
-        String name = "Enter Chromecast Here";
-        chromeCastName.setText(name);
+        //TODO: Connect to the Receiver App
 
+        String name = "Enter Chromecast Here";
+
+
+        mCastContext = CastContext.getSharedInstance(this);
+
+        chromeCastName.setText(name);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_welcome_, menu);
+        mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), menu, R.id.media_route_menu_item);
         return true;
     }
 
@@ -64,13 +76,15 @@ public class Welcome_Activity extends AppCompatActivity {
     public void welcomeMove(View view) {
         EditText et = (EditText) findViewById(R.id.userName);
         userName = et.getText().toString();
+
+        //TODO: Send UserName to Chromecast
+
         if(userName.length()==0){
             Toast.makeText(this, "Please Enter A Username", Toast.LENGTH_LONG).show();
 
         } else{
             Toast.makeText(this, "Username: "+userName, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Setup_Activity.class);
-            intent.putExtra("userName",userName);
             startActivity(intent);
         }
 

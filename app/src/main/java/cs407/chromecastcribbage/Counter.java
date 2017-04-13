@@ -39,7 +39,6 @@ public class Counter {
         int run = 0;
         boolean runFive = false;
         boolean runFour = false;
-        String msg = "";
         int numberOfThreeRun = 0;
         boolean triRun = false;
 
@@ -223,12 +222,11 @@ public class Counter {
                 + pairCount + " Pair for " + pair + "\n"
                 + threeOfaKindCount + " Three of a kind for " + threeOfaKind + "\n"
                 + fourOfaKindCount + " Four of a kind for " + fourOfaKind + "\n"
-                + "Flush for " + flushScore + "\n"
-                + "Run of five for " + runOfFive + "\n"
                 + runOfFourCount + " Run of four for " + runOfFour + "\n"
                 + runOfThreeCount + " Run of three for " + runOfThree + "\n"
+                + "Run of five for " + runOfFive + "\n"
+                + "Flush for " + flushScore + "\n"
                 + "Nobs for " + nobs + "\n"
-                + msg + "\n"
                 + "Total Score: " + totalScore;
     }
 

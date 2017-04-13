@@ -41,6 +41,9 @@ public class Find_Dealer_Activity extends AppCompatActivity {
 
             button = (Button) findViewById(view.getId());
             button.setVisibility(View.INVISIBLE);
+
+            //TODO: Send selected card to Chromecast?  Maybe not if deck is implemented on receiver app
+            //TODO: Wait until all players have selected a card
         }
     }
 

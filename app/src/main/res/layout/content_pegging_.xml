@@ -35,7 +35,7 @@
         <Button
             android:id="@+id/cardOneButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:onClick="playCard" />
 
         <Space
@@ -46,7 +46,7 @@
         <Button
             android:id="@+id/cardTwoButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:onClick="playCard" />
 
         <Space
@@ -57,7 +57,7 @@
         <Button
             android:id="@+id/cardThreeButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:onClick="playCard" />
 
         <Space
@@ -68,7 +68,7 @@
         <Button
             android:id="@+id/cardFourButton"
             android:layout_width="120dp"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:onClick="playCard" />
 
         <Space
