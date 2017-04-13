@@ -22,8 +22,6 @@ public class Setup_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        prev = getIntent().getExtras();
     }
 
     public void onClick(View view) {
@@ -32,17 +30,14 @@ public class Setup_Activity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.twoPlayerButton:
-                intent.putExtra("userName",prev.getString("userName"));
                 intent.putExtra("players",2);
                 startActivity(intent);
                 break;
             case R.id.threePlayerButton:
-                intent.putExtra("userName",prev.getString("userName"));
                 intent.putExtra("players",3);
                 startActivity(intent);
                 break;
             case R.id.fourPlayerButton:
-                intent.putExtra("userName",prev.getString("userName"));
                 intent.putExtra("players",4);
                 startActivity(intent);
                 break;

@@ -16,33 +16,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.83"
+        android:paddingTop="10dp"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <TextView
             android:id="@+id/turnText"
-            android:layout_width="88dp"
-            android:layout_height="match_parent"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:text="Your Hand Count"
-            android:textColor="#212121"
-            android:textSize="24dp" />
+            android:gravity="center_horizontal"
+            android:textColor="@color/icons"
+            android:background="@drawable/cherry"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/countString"
-            android:layout_width="436dp"
+            android:id="@+id/countString1"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:textSize="13dp"
+            android:text="TextView"
             android:textColor="#212121"
-            android:text="TextView" />
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/totalScore"
+            android:id="@+id/countString2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:layout_weight="1"
             android:textColor="#212121"
-            android:text="Total"
-            android:textSize="24dp" />
+            android:textSize="20sp"
+            android:text="TextView" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:background="@drawable/cherry"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalScore"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+
+                android:gravity="center_horizontal"
+                android:text="Total"
+                android:textColor="@color/icons"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/totalScore1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/icons"
+                android:textSize="40sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -54,13 +90,13 @@
         android:orientation="horizontal">
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
             android:id="@+id/cardOneButton"
-            android:layout_width="120dp"
+            android:layout_width="110dp"
             android:layout_height="150dp"/>
 
         <Space
@@ -70,8 +106,8 @@
 
         <Button
             android:id="@+id/cardTwoButton"
-            android:layout_width="120dp"
-            android:layout_height="150dp"/>
+            android:layout_width="110dp"
+            android:layout_height="150dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -80,7 +116,7 @@
 
         <Button
             android:id="@+id/cardThreeButton"
-            android:layout_width="120dp"
+            android:layout_width="110dp"
             android:layout_height="150dp"/>
 
         <Space
@@ -90,7 +126,7 @@
 
         <Button
             android:id="@+id/cardFourButton"
-            android:layout_width="120dp"
+            android:layout_width="110dp"
             android:layout_height="150dp"/>
 
         <Space
@@ -100,14 +136,18 @@
 
         <Button
             android:id="@+id/turnCardButton"
-            android:layout_width="120dp"
+            android:layout_width="110dp"
             android:layout_height="150dp"/>
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 
 </LinearLayout>

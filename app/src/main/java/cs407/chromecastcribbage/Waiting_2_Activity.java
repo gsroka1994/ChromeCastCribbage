@@ -17,6 +17,7 @@ public class Waiting_2_Activity extends AppCompatActivity {
     TextView playerThree;
     TextView playerFour;
     Bundle prev;
+    int numPlayers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,23 +34,39 @@ public class Waiting_2_Activity extends AppCompatActivity {
         playerFour = (TextView) findViewById(R.id.playerFour);
 
         prev = getIntent().getExtras();
+        numPlayers = prev.getInt("players");
 
-        if(prev.getInt("players") == 3){
-            playerFour.setVisibility(View.INVISIBLE);
-        } else if(prev.getInt("players") == 2){
-            playerFour.setVisibility(View.INVISIBLE);
-            playerThree.setVisibility(View.INVISIBLE);
-        }
-
-        playerOne.setText("Player One: "+prev.getString("userName"));
-
+        waiting();
     }
 
-
-
     public void waiting() {
-        Button button = (Button) findViewById(R.id.startButton);
-        button.setVisibility(View.VISIBLE);
+
+        boolean playersReady = true;
+        //TODO: Get player1 username from Chromecast and set it
+        String player1 = "temp";
+        playerOne.setText("   Player 1: " + player1);
+
+        if(numPlayers == 3){
+            playerThree.setVisibility(View.VISIBLE);
+        } else if(numPlayers == 4){
+            playerThree.setVisibility(View.VISIBLE);
+            playerFour.setVisibility(View.VISIBLE);
+
+            playerOne.setText("   Team 1: " + player1);
+            playerTwo.setText("   Team 1: (Waiting for Player)");
+            playerThree.setText("   Team 2: (Waiting for Player)");
+            playerFour.setText("   Team 2: (Waiting for Player)");
+        }
+
+        //TODO: Get Player UserIds from Chromecast and set text views to names
+        //TODO: When all spots are filled give start button to Player 1?  All Players?
+
+
+
+        if(playersReady){
+            Button button = (Button) findViewById(R.id.startButton);
+            button.setVisibility(View.VISIBLE);
+        }
     }
 
     public void startGame(View view) {

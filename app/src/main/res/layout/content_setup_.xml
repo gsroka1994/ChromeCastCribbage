@@ -25,21 +25,44 @@
     <Button
         android:id="@+id/twoPlayerButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:textSize="24sp"
         android:onClick="onClick"
         android:text="2 Player" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
 
     <Button
         android:id="@+id/threePlayerButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:textSize="24sp"
         android:onClick="onClick"
         android:text="3 Player" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
 
     <Button
         android:id="@+id/fourPlayerButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/icons"
+        android:background="@drawable/cherry"
+        android:textSize="24sp"
         android:onClick="onClick"
         android:text="4 Player (2 per Team)" />
 

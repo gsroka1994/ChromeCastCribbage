@@ -17,7 +17,8 @@ public class Count_Screen_Activity extends AppCompatActivity {
     Button card3;
     Button card4;
     Button turnCardButton;
-    TextView countView;
+    TextView countView1;
+    TextView countView2;
     TextView totalScore;
 
     @Override
@@ -35,8 +36,9 @@ public class Count_Screen_Activity extends AppCompatActivity {
         card3 = (Button) findViewById(R.id.cardThreeButton);
         card4 = (Button) findViewById(R.id.cardFourButton);
         turnCardButton = (Button) findViewById(R.id.turnCardButton);
-        countView = (TextView) findViewById(R.id.countString);
-        totalScore = (TextView) findViewById(R.id.totalScore);
+        countView1 = (TextView) findViewById(R.id.countString1);
+        countView2 = (TextView) findViewById(R.id.countString2);
+        totalScore = (TextView) findViewById(R.id.totalScore1);
 
         int id;
         Context context = card1.getContext();
@@ -58,9 +60,26 @@ public class Count_Screen_Activity extends AppCompatActivity {
         card4.setText(prev.getString("card4"));
         turnCardButton.setText(prev.getString("turnCard"));*/
         String countString = prev.getString("countString");
-        String[] count = countString.split("Total Score:");
-        countView.setText(count[0]);
-        totalScore.setText("TOTAL\n " + count[1]);
+        String[] score = countString.split("\n");
+        String breakdown1 = "";
+        String breakdown2 = "";
+        int counter = 0;
+        for(String line : score){
+            if(!line.endsWith("0") && !line.startsWith("Total Score: ")){
+                if(counter < 5){
+                    breakdown1 = breakdown1 + line + "\n";
+                } else{
+                    breakdown2 = breakdown2 + line + "\n";
+                }
+
+            }
+        }
+        countView1.setText(breakdown1);
+        countView2.setText(breakdown2);
+        String[] count = score[9].split("Total Score: ");
+        totalScore.setText(count[1]);
+
+        //TODO: When the Chromecast is ready move to the deal screen
 
     }
 

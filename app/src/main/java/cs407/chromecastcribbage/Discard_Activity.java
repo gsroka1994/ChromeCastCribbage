@@ -60,6 +60,8 @@ public class Discard_Activity extends AppCompatActivity {
 
         deck.shuffle();
 
+        //TODO: Get Cards from the chromecast
+
         hand.addCard(deck.dealCard());
         hand.addCard(deck.dealCard());
         hand.addCard(deck.dealCard());
@@ -85,8 +87,6 @@ public class Discard_Activity extends AppCompatActivity {
         card5 = hand.getCard(4);
         card6 = hand.getCard(5);
 
-        //card1.setImageResource(R.drawable.ace_of_clubs);
-        //card1Button.setText(card1.toString());
         int id;
         Context context = card1Button.getContext();
         id = context.getResources().getIdentifier(card1.getFileName(), "drawable", context.getPackageName());
@@ -102,16 +102,9 @@ public class Discard_Activity extends AppCompatActivity {
         id = context.getResources().getIdentifier(card6.getFileName(), "drawable", context.getPackageName());
         card6Button.setBackgroundResource(id);
 
-        /*card2Button.setText(card2.toString());
-        card3Button.setText(card3.toString());
-        card4Button.setText(card4.toString());
-        card5Button.setText(card5.toString());
-        card6Button.setText(card6.toString());*/
-
         int dpValue = 20; // margin in dips
         float d = this.getResources().getDisplayMetrics().density;
         margin = (int)(dpValue * d);
-
 
     }
 
@@ -133,6 +126,10 @@ public class Discard_Activity extends AppCompatActivity {
             // Turn card logic
             intent.putExtra("turnCardSuit", turnCard.getSuit());
             intent.putExtra("turnCardVal", turnCard.getValue());
+
+            //TODO: Send Crib Cards to the Chromecast
+
+
             startActivity(intent);
         }
     }

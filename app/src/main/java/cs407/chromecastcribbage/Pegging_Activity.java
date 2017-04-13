@@ -62,7 +62,6 @@ public class Pegging_Activity extends AppCompatActivity {
         cardName3 = hand.getCard(2).getFileName();
         cardName4 = hand.getCard(3).getFileName();
 
-        //card1.setImageResource(R.drawable.ace_of_clubs);
         int id;
         Context context = card1.getContext();
         id = context.getResources().getIdentifier(cardName1, "drawable", context.getPackageName());
@@ -74,22 +73,30 @@ public class Pegging_Activity extends AppCompatActivity {
         id = context.getResources().getIdentifier(cardName4, "drawable", context.getPackageName());
         card4.setBackgroundResource(id);
 
-        /*card2.setText(hand.getCard(1).toString());
-        card3.setText(hand.getCard(2).toString());
-        card4.setText(hand.getCard(3).toString());*/
         turnCardButton.setText(turnCard.toString());
 
         turnText = (TextView) findViewById(R.id.turnText);
+
+        //TODO: Get whos turn it is to peg
         if(yourTurn){
             turnText.setText("Its your turn to select a card for pegging");
         }
 
     }
 
+    public void waiting(){
+        //TODO: Get whos turn it is to peg
+        String userName = "temp";
+
+        if(yourTurn){
+            turnText.setText("Its your turn to select a card for pegging");
+        } else {
+            turnText.setText("Its " + userName + " turn to select a card for pegging");
+        }
+    }
 
     public void playCard(View view) {
         Card playCard = new Card();
-
 
         if (yourTurn) {
 
@@ -120,7 +127,6 @@ public class Pegging_Activity extends AppCompatActivity {
             Toast.makeText(this, "You have played " + playCard, Toast.LENGTH_LONG).show();
             turnText.setText("Its USERNAME's turn to select a card for pegging");
             //yourTurn = false;
-
         }
         else{
             Toast.makeText(this, "Its not your turn", Toast.LENGTH_LONG).show();
@@ -139,8 +145,12 @@ public class Pegging_Activity extends AppCompatActivity {
             intent.putExtra("card4", cardName4);
             intent.putExtra("turnCard", hand.getCard(4).getFileName());
             intent.putExtra("countString", countString);
+            //TODO: get the ok from Chromecast to move to next view
             startActivity(intent);
+        } else {
+            waiting();
         }
+
 
 
     }
