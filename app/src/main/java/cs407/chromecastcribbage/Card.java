@@ -2,110 +2,61 @@ package cs407.chromecastcribbage;
 
 public class Card {
 
-    public final static int SPADES = 0;   // Codes for the 4 suits, plus Joker.
-    public final static int HEARTS = 1;
-    public final static int DIAMONDS = 2;
-    public final static int CLUBS = 3;
-
-    public final static int ACE = 1;      // Codes for the non-numeric cards.
-    public final static int JACK = 11;    //   Cards 2 through 10 have their
-    public final static int QUEEN = 12;   //   numerical values for their codes.
-    public final static int KING = 13;
-
-    private final int suit;
-    private final int value;
+    private final String suit;
+    private final String value;
 
     public Card(){
-        suit=-1;
-        value=-1;
+        suit="";
+        value="";
     }
 
-    public Card(int theValue, int theSuit) {
-        if (theSuit != SPADES && theSuit != HEARTS && theSuit != DIAMONDS &&
-                theSuit != CLUBS)
-            throw new IllegalArgumentException("Illegal playing card suit");
-        if ((theValue < 1 || theValue > 13))
-            throw new IllegalArgumentException("Illegal playing card value");
+    public Card(String theValue, String theSuit) {
         value = theValue;
         suit = theSuit;
     }
 
-    public int getSuit() {
+    public String getSuit() {
         return suit;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public String getSuitAsString() {
+    public int getIntSuit() {
         switch (suit) {
-            case SPADES:
-                return "Spades";
-            case HEARTS:
-                return "Hearts";
-            case DIAMONDS:
-                return "Diamonds";
+            case "S":
+                return 1;
+            case "H":
+                return 2;
+            case "D":
+                return 3;
             default:
-                return "Clubs";
+                return 4;
         }
     }
 
-    public String getValueAsString() {
-        switch (value) {
-            case 1:
-                return "Ace";
-            case 2:
-                return "2";
-            case 3:
-                return "3";
-            case 4:
-                return "4";
-            case 5:
-                return "5";
-            case 6:
-                return "6";
-            case 7:
-                return "7";
-            case 8:
-                return "8";
-            case 9:
-                return "9";
-            case 10:
-                return "10";
-            case 11:
-                return "Jack";
-            case 12:
-                return "Queen";
-            default:
-                return "King";
+    public int getIntValue() {
+
+        String stringValue = value;
+        switch (stringValue) {
+            case "A":
+                stringValue = "1";
+                break;
+            case "J":
+                stringValue = "11";
+                break;
+            case "Q":
+                stringValue = "12";
+                break;
+            case "K":
+                stringValue = "13";
+                break;
         }
-
-    }
-
-    public String toString() {
-        return getValueAsString() + " of " + getSuitAsString();
+        return Integer.valueOf(stringValue);
     }
 
     public String getFileName() {
-
-        String value = getValueAsString();
-        switch (getValueAsString()){
-            case "Ace":
-                value = "1";
-                break;
-            case "Jack":
-                value = "11";
-                break;
-            case "Queen":
-                value = "12";
-                break;
-            case "King":
-                value = "13";
-                break;
-        }
-
-
-        return (getSuitAsString().toLowerCase() + "_" + value.toLowerCase()).toLowerCase();
+        return value + suit;
     }
 }

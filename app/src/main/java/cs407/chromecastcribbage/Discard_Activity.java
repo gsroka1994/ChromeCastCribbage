@@ -1,34 +1,18 @@
 package cs407.chromecastcribbage;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.io.InputStream;
-import java.net.URL;
+import com.squareup.picasso.Picasso;
 
 public class Discard_Activity extends AppCompatActivity {
 
-    Button card1Button;
-    Button card2Button;
-    Button card3Button;
-    Button card4Button;
-    Button card5Button;
-    Button card6Button;
     Hand hand;
     Hand crib;
     Card card1;
@@ -37,15 +21,21 @@ public class Discard_Activity extends AppCompatActivity {
     Card card4;
     Card card5;
     Card card6;
-    Card turnCard;
     int cribSize = 0;
-    Boolean selcted1 = false;
-    Boolean selcted2 = false;
-    Boolean selcted3 = false;
-    Boolean selcted4 = false;
-    Boolean selcted5 = false;
-    Boolean selcted6 = false;
+    Boolean selected1 = false;
+    Boolean selected2 = false;
+    Boolean selected3 = false;
+    Boolean selected4 = false;
+    Boolean selected5 = false;
+    Boolean selected6 = false;
     int margin;
+
+    ImageView card1IV;
+    ImageView card2IV;
+    ImageView card3IV;
+    ImageView card4IV;
+    ImageView card5IV;
+    ImageView card6IV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,30 +45,31 @@ public class Discard_Activity extends AppCompatActivity {
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
 
-        Deck deck = new Deck();
         hand = new Hand();
 
-        deck.shuffle();
+        //TODO: Get Cards codes from the chromecast
 
-        //TODO: Get Cards from the chromecast
+        String code1 = "AS";
+        String code2 = "2S";
+        String code3 = "3S";
+        String code4 = "4S";
+        String code5 = "5S";
+        String code6 = "6S";
 
-        hand.addCard(deck.dealCard());
-        hand.addCard(deck.dealCard());
-        hand.addCard(deck.dealCard());
-        hand.addCard(deck.dealCard());
-        hand.addCard(deck.dealCard());
-        hand.addCard(deck.dealCard());
+        hand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code6.charAt(0)),String.valueOf(code6.charAt(1))));
         hand.sortByValue();
 
-        turnCard = deck.dealCard();
-
-        //ImageButton card1 = (ImageButton) findViewById(R.id.cardOneButton);
-        card1Button = (Button) findViewById(R.id.cardOneButton);
-        card2Button = (Button) findViewById(R.id.cardTwoButton);
-        card3Button = (Button) findViewById(R.id.cardThreeButton);
-        card4Button = (Button) findViewById(R.id.cardFourButton);
-        card5Button = (Button) findViewById(R.id.cardFiveButton);
-        card6Button = (Button) findViewById(R.id.cardSixButton);
+        card1IV = (ImageView) findViewById(R.id.cardOneIV);
+        card2IV = (ImageView) findViewById(R.id.cardTwoIV);
+        card3IV = (ImageView) findViewById(R.id.cardThreeIV);
+        card4IV = (ImageView) findViewById(R.id.cardFourIV);
+        card5IV = (ImageView) findViewById(R.id.cardFiveIV);
+        card6IV = (ImageView) findViewById(R.id.cardSixIV);
 
         card1 = hand.getCard(0);
         card2 = hand.getCard(1);
@@ -87,25 +78,18 @@ public class Discard_Activity extends AppCompatActivity {
         card5 = hand.getCard(4);
         card6 = hand.getCard(5);
 
-        int id;
-        Context context = card1Button.getContext();
-        id = context.getResources().getIdentifier(card1.getFileName(), "drawable", context.getPackageName());
-        card1Button.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(card2.getFileName(), "drawable", context.getPackageName());
-        card2Button.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(card3.getFileName(), "drawable", context.getPackageName());
-        card3Button.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(card4.getFileName(), "drawable", context.getPackageName());
-        card4Button.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(card5.getFileName(), "drawable", context.getPackageName());
-        card5Button.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(card6.getFileName(), "drawable", context.getPackageName());
-        card6Button.setBackgroundResource(id);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card1.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card2.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card3.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card4.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card5.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card5IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card6.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card6IV);
 
         int dpValue = 20; // margin in dips
         float d = this.getResources().getDisplayMetrics().density;
         margin = (int)(dpValue * d);
 
+        crib = new Hand();
     }
 
     public void discardCards(View view) {
@@ -115,142 +99,128 @@ public class Discard_Activity extends AppCompatActivity {
 
         } else {
             Intent intent = new Intent(this, Pegging_Activity.class);
-            intent.putExtra("card1Suit", hand.getCard(0).getSuit());
-            intent.putExtra("card1Val", hand.getCard(0).getValue());
-            intent.putExtra("card2Suit", hand.getCard(1).getSuit());
-            intent.putExtra("card2Val", hand.getCard(1).getValue());
-            intent.putExtra("card3Suit", hand.getCard(2).getSuit());
-            intent.putExtra("card3Val", hand.getCard(2).getValue());
-            intent.putExtra("card4Suit", hand.getCard(3).getSuit());
-            intent.putExtra("card4Val", hand.getCard(3).getValue());
-            // Turn card logic
-            intent.putExtra("turnCardSuit", turnCard.getSuit());
-            intent.putExtra("turnCardVal", turnCard.getValue());
+            intent.putExtra("card1", hand.getCard(0).getFileName());
+            intent.putExtra("card2", hand.getCard(1).getFileName());
+            intent.putExtra("card3", hand.getCard(2).getFileName());
+            intent.putExtra("card4", hand.getCard(3).getFileName());
 
             //TODO: Send Crib Cards to the Chromecast
-
 
             startActivity(intent);
         }
     }
 
     public void addCardToCrib(View view) {
-        crib = new Hand();
-        Card card = new Card();
-
-        if (cribSize >= 2) {
-            Toast.makeText(this, "You have already selected 2 cards for the crib\n You need to deselect one before selecting a new one", Toast.LENGTH_LONG).show();
-        }
 
         LinearLayout.LayoutParams rel_btn;
 
 
         switch (view.getId()) {
-            case R.id.cardOneButton:
-                rel_btn = (LinearLayout.LayoutParams) card1Button.getLayoutParams();
-                if (!selcted1 && cribSize < 2) {
-                    selcted1=true;
+            case R.id.cardOneIV:
+                rel_btn = (LinearLayout.LayoutParams) card1IV.getLayoutParams();
+                if (!selected1 && cribSize < 2) {
+                    selected1 =true;
                     crib.addCard(card1);
                     cribSize++;
                     hand.removeCard(card1);
                     rel_btn.topMargin = 0;
-                } else if (selcted1) {
-                    selcted1=false;
+                } else if (selected1) {
+                    selected1 =false;
                     crib.removeCard(card1);
                     hand.addCard(card1);
                     cribSize--;
                     rel_btn.topMargin = margin;
                 }
-                card1Button.setLayoutParams(rel_btn);
+                card1IV.setLayoutParams(rel_btn);
                 break;
-            case R.id.cardTwoButton:
-                rel_btn = (LinearLayout.LayoutParams) card2Button.getLayoutParams();
-                if (!selcted2 && cribSize < 2) {
-                    selcted2=true;
+            case R.id.cardTwoIV:
+                rel_btn = (LinearLayout.LayoutParams) card2IV.getLayoutParams();
+                if (!selected2 && cribSize < 2) {
+                    selected2 =true;
                     crib.addCard(card2);
                     cribSize++;
                     hand.removeCard(card2);
                     rel_btn.topMargin = 0;
-                    card2Button.setLayoutParams(rel_btn);
-                } else if (selcted2) {
-                    selcted2=false;
+                    card2IV.setLayoutParams(rel_btn);
+                } else if (selected2) {
+                    selected2 =false;
                     crib.removeCard(card2);
                     hand.addCard(card2);
                     cribSize--;
                     rel_btn.topMargin = margin;
-                    card2Button.setLayoutParams(rel_btn);
+                    card2IV.setLayoutParams(rel_btn);
                 }
                 break;
-            case R.id.cardThreeButton:
-                rel_btn = (LinearLayout.LayoutParams) card3Button.getLayoutParams();
-                if (!selcted3 && cribSize < 2) {
-                    selcted3=true;
+            case R.id.cardThreeIV:
+                rel_btn = (LinearLayout.LayoutParams) card3IV.getLayoutParams();
+                if (!selected3 && cribSize < 2) {
+                    selected3 =true;
                     crib.addCard(card3);
                     cribSize++;
                     hand.removeCard(card3);
                     rel_btn.topMargin = 0;
-                    card3Button.setLayoutParams(rel_btn);
-                } else if (selcted3) {
-                    selcted3=false;
+                    card3IV.setLayoutParams(rel_btn);
+                } else if (selected3) {
+                    selected3 =false;
                     crib.removeCard(card3);
                     hand.addCard(card3);
                     cribSize--;
                     rel_btn.topMargin = margin;
-                    card3Button.setLayoutParams(rel_btn);
+                    card3IV.setLayoutParams(rel_btn);
                 }
                 break;
-            case R.id.cardFourButton:
-                rel_btn = (LinearLayout.LayoutParams) card4Button.getLayoutParams();
-                if (!selcted4 && cribSize < 2) {
-                    selcted4=true;
+            case R.id.cardFourIV:
+                rel_btn = (LinearLayout.LayoutParams) card4IV.getLayoutParams();
+                if (!selected4 && cribSize < 2) {
+                    selected4 =true;
                     crib.addCard(card4);
                     cribSize++;
                     hand.removeCard(card4);
                     rel_btn.topMargin = 0;
-                    card4Button.setLayoutParams(rel_btn);
-                } else if (selcted4) {
-                    selcted4=false;
+                    card4IV.setLayoutParams(rel_btn);
+                } else if (selected4) {
+                    selected4 =false;
                     crib.removeCard(card4);
                     hand.addCard(card4);
                     cribSize--;
                     rel_btn.topMargin = margin;
-                    card4Button.setLayoutParams(rel_btn);
+                    card4IV.setLayoutParams(rel_btn);
                 }
                 break;
-            case R.id.cardFiveButton:
-                rel_btn = (LinearLayout.LayoutParams) card5Button.getLayoutParams();
-                if (!selcted5 && cribSize < 2) {
-                    selcted5=true;
+            case R.id.cardFiveIV:
+                rel_btn = (LinearLayout.LayoutParams) card5IV.getLayoutParams();
+                if (!selected5 && cribSize < 2) {
+                    selected5 =true;
                     crib.addCard(card5);
                     cribSize++;
                     hand.removeCard(card5);
                     rel_btn.topMargin = 0;
-                    card5Button.setLayoutParams(rel_btn);
-                } else if (selcted5) {
-                    selcted5=false;
+                    card5IV.setLayoutParams(rel_btn);
+                } else if (selected5) {
+                    selected5 =false;
                     crib.removeCard(card5);
                     hand.addCard(card5);
                     cribSize--;
                     rel_btn.topMargin = margin;
-                    card5Button.setLayoutParams(rel_btn);
+                    card5IV.setLayoutParams(rel_btn);
                 }
                 break;
-            case R.id.cardSixButton:
-                rel_btn = (LinearLayout.LayoutParams) card6Button.getLayoutParams();
-                if (!selcted6 && cribSize < 2) {
-                    selcted6=true;
+            case R.id.cardSixIV:
+                rel_btn = (LinearLayout.LayoutParams) card6IV.getLayoutParams();
+                if (!selected6 && cribSize < 2) {
+                    selected6 =true;
                     crib.addCard(card6);
                     cribSize++;
                     hand.removeCard(card6);
                     rel_btn.topMargin = 0;
-                    card6Button.setLayoutParams(rel_btn);
-                } else if (selcted6) {
-                    selcted6=false;
+                    card6IV.setLayoutParams(rel_btn);
+                } else if (selected6) {
+                    selected6 =false;
                     crib.removeCard(card6);
                     hand.addCard(card6);
                     cribSize--;
                     rel_btn.topMargin = margin;
-                    card6Button.setLayoutParams(rel_btn);
+                    card6IV.setLayoutParams(rel_btn);
                 }
                 break;
         }

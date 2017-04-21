@@ -46,9 +46,9 @@ public class Counter {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
             if (hashMap.containsKey(hand.getCard(i).getValue())) {
-                hashMap.put(hand.getCard(i).getValue(), hashMap.get(hand.getCard(i).getValue()) + 1);
+                hashMap.put(hand.getCard(i).getIntValue(), hashMap.get(hand.getCard(i).getValue()) + 1);
             } else {
-                hashMap.put(hand.getCard(i).getValue(), 1);
+                hashMap.put(hand.getCard(i).getIntValue(), 1);
             }
         }
         for (int count : hashMap.values()) {
@@ -66,7 +66,7 @@ public class Counter {
 
         //Check for Nobs
         for (int i = 0; i < 4; i++) {
-            if (hand.getCard(i).getValue() == 11 && hand.getCard(i).getSuit() == hand.getCard(4).getSuit()) {
+            if (hand.getCard(i).getIntValue() == 11 && hand.getCard(i).getSuit() == hand.getCard(4).getSuit()) {
                 nobs = 1;
             }
         }
@@ -74,26 +74,26 @@ public class Counter {
         //Check for flush
         for (int i = 0; i < 4; i++) {
             if (i == 0) {
-                suit = hand.getCard(i).getSuit();
+                suit = hand.getCard(i).getIntSuit();
             } else {
-                if (hand.getCard(i).getSuit() != suit) {
+                if (hand.getCard(i).getIntSuit() != suit) {
                     flush = false;
                 }
             }
         }
         if (flush) {
             flushScore = 4;
-            if (hand.getCard(4).getSuit() == suit) {
+            if (hand.getCard(4).getIntSuit() == suit) {
                 flushScore = 5;
             }
         }
 
         //Make all face cards value equal to 10
         for (int i = 0; i < 5; i++) {
-            if (hand.getCard(i).getValue() > 10) {
+            if (hand.getCard(i).getIntValue() > 10) {
                 cards.add(i, 10);
             } else {
-                cards.add(i, hand.getCard(i).getValue());
+                cards.add(i, hand.getCard(i).getIntValue());
             }
         }
 
@@ -134,7 +134,7 @@ public class Counter {
 
         //Add values to set
         for (int i = 0; i < 5; i++) {
-            cardSet.add(hand.getCard(i).getValue());
+            cardSet.add(hand.getCard(i).getIntValue());
         }
 
         TreeSet treeSet = new TreeSet(cardSet);

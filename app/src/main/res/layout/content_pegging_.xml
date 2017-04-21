@@ -21,6 +21,10 @@
         android:textColor="#212121"
         android:layout_weight="0.05" />
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardOneButton"
+        <ImageView
+            android:id="@+id/cardOneIV"
             android:layout_width="120dp"
             android:layout_height="170dp"
             android:onClick="playCard" />
@@ -43,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardTwoButton"
+        <ImageView
+            android:id="@+id/cardTwoIV"
             android:layout_width="120dp"
             android:layout_height="170dp"
             android:onClick="playCard" />
@@ -54,8 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardThreeButton"
+        <ImageView
+            android:id="@+id/cardThreeIV"
             android:layout_width="120dp"
             android:layout_height="170dp"
             android:onClick="playCard" />
@@ -65,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardFourButton"
+        <ImageView
+            android:id="@+id/cardFourIV"
             android:layout_width="120dp"
             android:layout_height="170dp"
             android:onClick="playCard" />
@@ -77,12 +81,5 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/turnCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.05"/>
-
 
 </LinearLayout>

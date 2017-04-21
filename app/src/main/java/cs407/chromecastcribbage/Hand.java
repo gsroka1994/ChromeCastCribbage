@@ -49,8 +49,8 @@ public class Hand {
             Card c = hand.get(0);  // Minimal card.
             for (int i = 1; i < hand.size(); i++) {
                 Card c1 = hand.get(i);
-                if ( c1.getSuit() < c.getSuit() ||
-                        (c1.getSuit() == c.getSuit() && c1.getValue() < c.getValue()) ) {
+                if ( c1.getIntSuit() < c.getIntSuit() ||
+                        (c1.getSuit() == c.getSuit() && c1.getIntValue() < c.getIntValue()) ) {
                     pos = i;
                     c = c1;
                 }
@@ -68,8 +68,8 @@ public class Hand {
             Card c = hand.get(0);  // Minimal card.
             for (int i = 1; i < hand.size(); i++) {
                 Card c1 = hand.get(i);
-                if ( c1.getValue() > c.getValue() ||
-                        (c1.getValue() == c.getValue() && c1.getSuit() > c.getSuit()) ) {
+                if ( c1.getIntValue() > c.getIntValue() ||
+                        (c1.getValue() == c.getValue() && c1.getIntSuit() > c.getIntSuit()) ) {
                     pos = i;
                     c = c1;
                 }
@@ -87,8 +87,8 @@ public class Hand {
             Card c = hand.get(0);  // Minimal card.
             for (int i = 1; i > hand.size(); i++) {
                 Card c1 = hand.get(i);
-                if ( c1.getValue() > c.getValue() ||
-                        (c1.getValue() == c.getValue() && c1.getSuit() > c.getSuit()) ) {
+                if ( c1.getIntValue() > c.getIntValue() ||
+                        (c1.getValue() == c.getValue() && c1.getIntSuit() > c.getIntSuit()) ) {
                     pos = i;
                     c = c1;
                 }

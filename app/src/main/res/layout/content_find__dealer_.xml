@@ -29,14 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <ImageView
             android:id="@+id/button1"
             android:layout_width="90dp"
             android:layout_height="125dp"
             android:background="@drawable/back"
             android:onClick="selectCard"/>
 
-        <Button
+        <ImageView
             android:id="@+id/button2"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -45,7 +45,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button3"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -54,7 +54,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button4"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -63,7 +63,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button5"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -72,7 +72,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button6"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -81,7 +81,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button7"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -90,7 +90,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button8"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -99,7 +99,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button9"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -108,7 +108,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button10"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -117,7 +117,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button11"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -126,7 +126,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button12"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -135,7 +135,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button13"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -144,7 +144,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button14"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -153,7 +153,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button15"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -162,7 +162,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button16"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -171,7 +171,7 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
+        <ImageView
             android:id="@+id/button17"
             android:layout_width="90dp"
             android:layout_height="125dp"
@@ -180,17 +180,15 @@
             android:background="@drawable/back"
             android:onClick="selectCard" />
 
-        <Button
-            android:id="@+id/button18"
+        <ImageView
+            android:id="@+id/cardIV"
             android:layout_width="140dp"
             android:layout_height="200dp"
             android:visibility="invisible"
             android:onClick="moveNext"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/button5"
-            android:layout_toEndOf="@+id/button5" />
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
-
 
 </LinearLayout>
