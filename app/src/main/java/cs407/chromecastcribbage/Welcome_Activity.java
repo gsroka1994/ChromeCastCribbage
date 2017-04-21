@@ -1,6 +1,8 @@
 package cs407.chromecastcribbage;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,6 +35,12 @@ public class Welcome_Activity extends AppCompatActivity {
 
         Button chromeCastName = (Button) findViewById(R.id.chromeCastName);
 
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        String defaultValue = "";
+        String userName = sharedPref.getString(getString(R.string.userName), defaultValue);
+
+        EditText userNameET = (EditText) findViewById(R.id.userName);
+        userNameET.setText(userName);
 
         //TODO: Find names of available chromecasts
         //TODO: Connect to the Receiver App
@@ -76,6 +84,11 @@ public class Welcome_Activity extends AppCompatActivity {
     public void welcomeMove(View view) {
         EditText et = (EditText) findViewById(R.id.userName);
         userName = et.getText().toString();
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.userName), userName);
+        editor.commit();
 
         //TODO: Send UserName to Chromecast
 

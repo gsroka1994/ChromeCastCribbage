@@ -110,7 +110,6 @@ public class Pegging_Activity extends AppCompatActivity {
             }
 
             //TODO: Send playCard to Chromecast
-            Toast.makeText(this, "You have played " + playCard, Toast.LENGTH_LONG).show();
             turnText.setText("Its USERNAME's turn to select a card for pegging");
             //yourTurn = false;
         }
@@ -127,7 +126,6 @@ public class Pegging_Activity extends AppCompatActivity {
             hand.sortByValueLowHigh();
 
             String countString = Counter.count(hand);
-            Toast.makeText(this,countString, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Count_Screen_Activity.class);
             intent.putExtra("card1", cardName1);
