@@ -94,8 +94,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardOneButton"
+        <ImageView
+            android:id="@+id/cardOneIV"
             android:layout_width="110dp"
             android:layout_height="150dp"/>
 
@@ -104,8 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardTwoButton"
+        <ImageView
+            android:id="@+id/cardTwoIV"
             android:layout_width="110dp"
             android:layout_height="150dp" />
 
@@ -114,8 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardThreeButton"
+        <ImageView
+            android:id="@+id/cardThreeIV"
             android:layout_width="110dp"
             android:layout_height="150dp"/>
 
@@ -124,8 +124,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/cardFourButton"
+        <ImageView
+            android:id="@+id/cardFourIV"
             android:layout_width="110dp"
             android:layout_height="150dp"/>
 
@@ -134,8 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/turnCardButton"
+        <ImageView
+            android:id="@+id/turnCardIV"
             android:layout_width="110dp"
             android:layout_height="150dp"/>
 

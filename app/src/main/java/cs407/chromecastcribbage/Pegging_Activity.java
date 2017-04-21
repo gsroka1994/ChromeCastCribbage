@@ -1,29 +1,19 @@
 package cs407.chromecastcribbage;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 public class Pegging_Activity extends AppCompatActivity {
 
-    Button card1;
-    Button card2;
-    Button card3;
-    Button card4;
-    Button turnCardButton;
     Hand hand;
-    Card turnCard;
     Boolean yourTurn = true;
     TextView turnText;
     int count = 4;
@@ -31,6 +21,11 @@ public class Pegging_Activity extends AppCompatActivity {
     String cardName2;
     String cardName3;
     String cardName4;
+
+    ImageView card1IV;
+    ImageView card2IV;
+    ImageView card3IV;
+    ImageView card4IV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,37 +38,28 @@ public class Pegging_Activity extends AppCompatActivity {
         hand = new Hand();
 
         Bundle prev = getIntent().getExtras();
-        hand.addCard(new Card(prev.getInt("card1Val"), prev.getInt("card1Suit")));
-        hand.addCard(new Card(prev.getInt("card2Val"), prev.getInt("card2Suit")));
-        hand.addCard(new Card(prev.getInt("card3Val"), prev.getInt("card3Suit")));
-        hand.addCard(new Card(prev.getInt("card4Val"), prev.getInt("card4Suit")));
-        // TurnCard stuff
-        turnCard = new Card(prev.getInt("turnCardVal"), prev.getInt("turnCardSuit"));
+        cardName1 = prev.getString("card1");
+        cardName2 = prev.getString("card2");
+        cardName3 = prev.getString("card3");
+        cardName4 = prev.getString("card4");
+
+
+        hand.addCard(new Card(String.valueOf(cardName1.charAt(0)),String.valueOf(cardName1.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName2.charAt(0)),String.valueOf(cardName2.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName3.charAt(0)),String.valueOf(cardName3.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName4.charAt(0)),String.valueOf(cardName4.charAt(1))));
         hand.sortByValue();
 
-        card1 = (Button) findViewById(R.id.cardOneButton);
-        card2 = (Button) findViewById(R.id.cardTwoButton);
-        card3 = (Button) findViewById(R.id.cardThreeButton);
-        card4 = (Button) findViewById(R.id.cardFourButton);
-        turnCardButton = (Button) findViewById(R.id.turnCard);
 
-        cardName1 = hand.getCard(0).getFileName();
-        cardName2 = hand.getCard(1).getFileName();
-        cardName3 = hand.getCard(2).getFileName();
-        cardName4 = hand.getCard(3).getFileName();
+        card1IV = (ImageView) findViewById(R.id.cardOneIV);
+        card2IV = (ImageView) findViewById(R.id.cardTwoIV);
+        card3IV = (ImageView) findViewById(R.id.cardThreeIV);
+        card4IV = (ImageView) findViewById(R.id.cardFourIV);
 
-        int id;
-        Context context = card1.getContext();
-        id = context.getResources().getIdentifier(cardName1, "drawable", context.getPackageName());
-        card1.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(cardName2, "drawable", context.getPackageName());
-        card2.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(cardName3, "drawable", context.getPackageName());
-        card3.setBackgroundResource(id);
-        id = context.getResources().getIdentifier(cardName4, "drawable", context.getPackageName());
-        card4.setBackgroundResource(id);
-
-        turnCardButton.setText(turnCard.toString());
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName1+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName2+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName3+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName4+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
 
         turnText = (TextView) findViewById(R.id.turnText);
 
@@ -101,25 +87,25 @@ public class Pegging_Activity extends AppCompatActivity {
         if (yourTurn) {
 
             switch (view.getId()) {
-                case R.id.cardOneButton:
+                case R.id.cardOneIV:
                     playCard = hand.getCard(0);
                     count--;
-                    card1.setVisibility(View.INVISIBLE);
+                    card1IV.setVisibility(View.INVISIBLE);
                     break;
-                case R.id.cardTwoButton:
+                case R.id.cardTwoIV:
                     playCard = hand.getCard(1);
                     count--;
-                    card2.setVisibility(View.INVISIBLE);
+                    card2IV.setVisibility(View.INVISIBLE);
                     break;
-                case R.id.cardThreeButton:
+                case R.id.cardThreeIV:
                     playCard = hand.getCard(2);
                     count--;
-                    card3.setVisibility(View.INVISIBLE);
+                    card3IV.setVisibility(View.INVISIBLE);
                     break;
-                case R.id.cardFourButton:
+                case R.id.cardFourIV:
                     playCard = hand.getCard(3);
                     count--;
-                    card4.setVisibility(View.INVISIBLE);
+                    card4IV.setVisibility(View.INVISIBLE);
                     break;
             }
 
@@ -134,7 +120,12 @@ public class Pegging_Activity extends AppCompatActivity {
 
         if(count == 0){
             //TODO: Get turn card from Chromecast and add it to hand
-            hand.addCard(turnCard);
+
+            String turnCardCode = "JS";
+
+            hand.addCard(new Card(String.valueOf(turnCardCode.charAt(0)),String.valueOf(turnCardCode.charAt(1))));
+            hand.sortByValueLowHigh();
+
             String countString = Counter.count(hand);
             Toast.makeText(this,countString, Toast.LENGTH_LONG).show();
 
@@ -143,7 +134,7 @@ public class Pegging_Activity extends AppCompatActivity {
             intent.putExtra("card2", cardName2);
             intent.putExtra("card3", cardName3);
             intent.putExtra("card4", cardName4);
-            intent.putExtra("turnCard", hand.getCard(4).getFileName());
+            intent.putExtra("turnCard", turnCardCode);
             intent.putExtra("countString", countString);
             //TODO: get the ok from Chromecast to move to next view
             startActivity(intent);

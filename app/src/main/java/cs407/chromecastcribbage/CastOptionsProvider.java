@@ -17,7 +17,7 @@ public class CastOptionsProvider implements OptionsProvider {
     @Override
     public CastOptions getCastOptions(Context context) {
         return new CastOptions.Builder()
-                .setReceiverApplicationId("4F8B3483")
+                .setReceiverApplicationId("A7E2DC4A")
                 .build();
     }
 
