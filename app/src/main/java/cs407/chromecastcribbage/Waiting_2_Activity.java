@@ -47,12 +47,14 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
         playerThree = (TextView) findViewById(R.id.playerThree);
         playerFour = (TextView) findViewById(R.id.playerFour);
 
-        prev = getIntent().getExtras();
+        //prev = getIntent().getExtras();
         //numPlayers = 3;//prev.getInt("players");
 
         //mCastConnectionManager = Welcome_Activity.getCastConnectionManager();
 
         waiting();
+
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
     }
 
     public void waiting() {
@@ -107,7 +109,7 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
 
     @Override
     public void onGameMessageReceived(String playerId, JSONObject message) {
-        if (message.has("ready")) {
+        if (message.has("player1")) {
             try {
                 String player1 = message.getString("player1");
                 String player2 = message.getString("player2");
@@ -117,12 +119,10 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
                     playerTwo.setVisibility(View.VISIBLE);
                     playerTwo.setText(player2);
                 }
-
-
-
-
+                
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
+                playerFour.setText("SHIT");
             }
         }
     }
