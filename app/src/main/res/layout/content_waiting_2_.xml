@@ -44,6 +44,7 @@
         android:background="@drawable/cherry"
         android:gravity="center_vertical"
         android:textSize="24sp"
+        android:visibility="invisible"
         android:text="   Player 2: (Waiting for Player)" />
 
     <Space

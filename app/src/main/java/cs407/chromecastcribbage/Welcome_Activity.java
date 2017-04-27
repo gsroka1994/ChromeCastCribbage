@@ -36,7 +36,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
     private CastContext mCastContext;
     private MenuItem mediaRouteMenuItem;
     String userName;
-    private static CastConnectionManager mCastConnectionManager;
+    public static CastConnectionManager mCastConnectionManager;
     private int mPlayerState = GameManagerClient.PLAYER_STATE_UNKNOWN;
     private String mPlayerName;
     TextView statusMessage;
@@ -67,8 +67,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
             chromeCastName.setText(name);
         }
 
-        mCastConnectionManager = new CastConnectionManager(this,
-                "A7E2DC4A");
+        mCastConnectionManager = new CastConnectionManager(this, "A7E2DC4A");
 
         //mCastContext = CastContext.getSharedInstance(this);
 
