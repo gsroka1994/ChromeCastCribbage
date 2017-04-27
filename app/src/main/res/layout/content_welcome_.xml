@@ -39,13 +39,17 @@
         android:layout_height="100dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/statusMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Select a Chromecast"
+        android:text="Connect to a Chromecast Above"
         android:textColor="#212121"
         android:textSize="30sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/chromeCastName"
@@ -56,7 +60,7 @@
         android:textColor="@color/icons"
         android:background="@drawable/cherry"
         android:textSize="24sp"
-        android:text="ChromeCast Name"
+        android:text="Get Started"
         android:onClick="welcomeMove"/>
 
 </LinearLayout>
