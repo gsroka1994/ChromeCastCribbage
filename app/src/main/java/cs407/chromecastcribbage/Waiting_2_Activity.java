@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+
 public class Waiting_2_Activity extends AppCompatActivity {
 
     TextView playerOne;
@@ -18,6 +22,8 @@ public class Waiting_2_Activity extends AppCompatActivity {
     TextView playerFour;
     Bundle prev;
     int numPlayers;
+    private static CastConnectionManager mCastConnectionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +40,9 @@ public class Waiting_2_Activity extends AppCompatActivity {
         playerFour = (TextView) findViewById(R.id.playerFour);
 
         prev = getIntent().getExtras();
-        numPlayers = prev.getInt("players");
+        numPlayers = 3;//prev.getInt("players");
+
+        mCastConnectionManager = Welcome_Activity.getCastConnectionManager();
 
         waiting();
     }
@@ -70,7 +78,36 @@ public class Waiting_2_Activity extends AppCompatActivity {
     }
 
     public void startGame(View view) {
+        //sendPlayerPlayingRequest();
         Intent intent = new Intent(this, Find_Dealer_Activity.class);
         startActivity(intent);
     }
+
+/*    public void sendPlayerPlayingRequest() {
+        final GameManagerClient gameManagerClient =
+                mCastConnectionManager.getGameManagerClient();
+        if (mCastConnectionManager.isConnectedToReceiver()) {
+            PendingResult<GameManagerClient.GameManagerResult> result =
+                    gameManagerClient.sendPlayerPlayingRequest(null);
+            result.setResultCallback(
+                    new ResultCallback<GameManagerClient.GameManagerResult>() {
+                        @Override
+                        public void onResult(final GameManagerClient.GameManagerResult
+                                                     gameManagerResult) {
+                            if (gameManagerResult.getStatus().isSuccess()) {
+                               // ((MainActivity) getActivity()).setPlayerState(
+                                 //       gameManagerClient.getCurrentState().getPlayer(
+                                   //             gameManagerResult.getPlayerId())
+                                     //           .getPlayerState());
+                            } else {
+                                //mCastConnectionManager.disconnectFromReceiver(false);
+                                //Utils.showErrorDialog(getActivity(),
+                                      //  gameManagerResult.getStatus().getStatusMessage());
+
+
+                            }
+                        }
+                    });
+        }
+    }*/
 }

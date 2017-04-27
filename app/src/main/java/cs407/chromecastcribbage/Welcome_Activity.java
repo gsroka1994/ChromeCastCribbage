@@ -133,7 +133,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
 
             sendPlayerReadyRequest();
 
-            Intent intent = new Intent(this, Setup_Activity.class);
+            Intent intent = new Intent(this, Waiting_2_Activity.class);
             startActivity(intent);
         }
 
@@ -198,7 +198,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
             // Send player name to the receiver
             JSONObject jsonMessage = new JSONObject();
             try {
-                jsonMessage.put("name", userName);
+                jsonMessage.put("playerName", userName);
             } catch (JSONException e) {
                 Log.e(TAG, "Error creating JSON message", e);
                 return;
