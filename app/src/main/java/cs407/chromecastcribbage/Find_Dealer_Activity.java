@@ -4,14 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.cast.games.GameManagerState;
 import com.squareup.picasso.Picasso;
 
-public class Find_Dealer_Activity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static java.lang.Thread.sleep;
+
+public class Find_Dealer_Activity extends AppCompatActivity implements GameManagerClient.Listener{
 
     boolean selected = false;
+    String card;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +29,17 @@ public class Find_Dealer_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
+
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("getDealerCard", "card");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
 
     }
 
@@ -30,8 +51,6 @@ public class Find_Dealer_Activity extends AppCompatActivity {
             ImageView cardIV = (ImageView) findViewById(R.id.cardIV);
             cardIV.bringToFront();
 
-            String card = "7C";
-
             Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card+".png").placeholder(R.drawable.back).error(R.drawable.error).into(cardIV);
 
             cardIV.setVisibility(View.VISIBLE);
@@ -39,13 +58,34 @@ public class Find_Dealer_Activity extends AppCompatActivity {
             ImageView selectedCard = (ImageView) findViewById(view.getId());
             selectedCard.setVisibility(View.INVISIBLE);
 
-            //TODO: Send selected card to Chromecast?  Maybe not if deck is implemented on receiver app
-            //TODO: Wait until all players have selected a card
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("toDealScreen", "toDealScreen");
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
         }
     }
 
-    public void moveNext(View view) {
-        Intent intent = new Intent(this, Deal_Activity.class);
-        startActivity(intent);
+    @Override
+    public void onGameMessageReceived(String playerId, JSONObject message) {
+        if (message.has("code")) {
+            try {
+                card = message.getString("code");
+            } catch (JSONException e) {
+                Log.e("json", "onGameMessageReceived", e);
+            }
+        } else if(message.has("toDealScreen")) {
+            Intent intent = new Intent(this, Deal_Activity.class);
+            startActivity(intent);
+        }
     }
+
+    @Override
+    public void onStateChanged(GameManagerState gameManagerState, GameManagerState gameManagerState1) {
+
+    }
+
 }

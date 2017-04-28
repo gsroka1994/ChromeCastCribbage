@@ -39,24 +39,29 @@
         android:layout_height="100dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/statusMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Select a Chromecast"
+        android:text="Connect to a Chromecast Above"
         android:textColor="#212121"
         android:textSize="30sp" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
     <Button
-        android:id="@+id/chromeCastName"
+        android:id="@+id/joinLobyButton"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textColor="@color/icons"
         android:background="@drawable/cherry"
-        android:textSize="24sp"
-        android:text="ChromeCast Name"
-        android:onClick="welcomeMove"/>
+        android:onClick="welcomeMove"
+        android:text="Join Lobby"
+        android:visibility="invisible"
+        android:textColor="@color/icons"
+        android:textSize="24sp" />
 
 </LinearLayout>

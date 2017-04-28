@@ -9,9 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class Setup_Activity extends AppCompatActivity {
+public class Setup_Activity extends AppCompatActivity{
 
     Bundle prev;
+    private CastConnectionManager mCastConnectionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,12 @@ public class Setup_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mCastConnectionManager = Welcome_Activity.getCastConnectionManager();
+        //((Welcome_Activity)
+                //getActivity()).getCastConnectionManager();
+
+
+
     }
 
     public void onClick(View view) {
