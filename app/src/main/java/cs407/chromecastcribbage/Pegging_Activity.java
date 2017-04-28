@@ -71,6 +71,9 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
 
         turnText = (TextView) findViewById(R.id.turnText);
 
+
+        turnText.setText("Waiting for Everyone to Finish Discarding");
+
         // Get the currentTurn
         JSONObject jsonMessage = new JSONObject();
         try {
@@ -80,9 +83,6 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             return;
         }
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
-        turnText.setText("Waiting for Everyone to Finish Discarding");
-
-
     }
 
     public void waiting() {
@@ -196,6 +196,16 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } else if (message.has("toPeggingScreen")) {
+            // Get the currentTurn
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("getTurn", "turn");
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
         }
     }
 }

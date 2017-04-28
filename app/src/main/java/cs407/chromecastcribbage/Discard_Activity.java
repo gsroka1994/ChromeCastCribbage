@@ -98,6 +98,13 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
+            Intent intent = new Intent(this, Pegging_Activity.class);
+            intent.putExtra("card1", hand.getCard(0).getFileName());
+            intent.putExtra("card2", hand.getCard(1).getFileName());
+            intent.putExtra("card3", hand.getCard(2).getFileName());
+            intent.putExtra("card4", hand.getCard(3).getFileName());
+            startActivity(intent);
+
         }
     }
 
@@ -286,14 +293,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
             }
-        } else if(message.has("toPeggingScreen")) {
-            Intent intent = new Intent(this, Pegging_Activity.class);
-            intent.putExtra("card1", hand.getCard(0).getFileName());
-            intent.putExtra("card2", hand.getCard(1).getFileName());
-            intent.putExtra("card3", hand.getCard(2).getFileName());
-            intent.putExtra("card4", hand.getCard(3).getFileName());
-            startActivity(intent);
-        } else if((message.has("sendP2Hand"))){
+        }  else if((message.has("sendP2Hand"))){
             // Get the hand
             JSONObject jsonMessage = new JSONObject();
             try {
