@@ -69,15 +69,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
         }
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
-        // Get the hand
-        jsonMessage = new JSONObject();
-        try {
-            jsonMessage.put("deal", "deal");
-        } catch (JSONException e) {
-            Log.e("json", "Error creating JSON message", e);
-            return;
-        }
-        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
 
         int dpValue = 20; // margin in dips
         float d = this.getResources().getDisplayMetrics().density;
@@ -248,6 +240,17 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            // Get the hand
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("getHand", "getHand");
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
         } else if (message.has("card1")) {
             try {
                 String code1 = message.getString("card1");
@@ -292,6 +295,16 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
         } else if(message.has("toPeggingScreen")) {
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
+        } else if((message.has("sendP2Hand"))){
+            // Get the hand
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("getP2Hand", "getHand");
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
         }
     }
 
