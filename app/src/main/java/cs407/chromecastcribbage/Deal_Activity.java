@@ -80,6 +80,9 @@ public class Deal_Activity extends AppCompatActivity implements GameManagerClien
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
             }
+        } else if(message.has("toDiscardScreen")){
+            Intent intent = new Intent(this, Discard_Activity.class);
+            startActivity(intent);
         }
     }
 }

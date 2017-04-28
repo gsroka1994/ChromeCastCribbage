@@ -69,6 +69,11 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
                 Log.e("json", "onGameMessageReceived", e);
             }
         } else if(message.has("toDealScreen")) {
+            try {
+                wait(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
         }
