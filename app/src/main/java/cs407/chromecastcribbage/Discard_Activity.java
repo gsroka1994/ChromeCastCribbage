@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.cast.games.GameManagerState;
 import com.squareup.picasso.Picasso;
 
-public class Discard_Activity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Discard_Activity extends AppCompatActivity implements GameManagerClient.Listener{
 
     Hand hand;
     Hand crib;
@@ -28,6 +35,7 @@ public class Discard_Activity extends AppCompatActivity {
     Boolean selected4 = false;
     Boolean selected5 = false;
     Boolean selected6 = false;
+    String dealer = null;
     int margin;
 
     ImageView card1IV;
@@ -45,45 +53,31 @@ public class Discard_Activity extends AppCompatActivity {
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
 
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
+
         hand = new Hand();
 
         //TODO: Get Cards codes from the chromecast
 
-        String code1 = "AS";
-        String code2 = "2S";
-        String code3 = "3S";
-        String code4 = "4S";
-        String code5 = "5S";
-        String code6 = "6S";
+        // Get the dealer
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("getDealer", "dealer");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
-        hand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code6.charAt(0)),String.valueOf(code6.charAt(1))));
-        hand.sortByValue();
-
-        card1IV = (ImageView) findViewById(R.id.cardOneIV);
-        card2IV = (ImageView) findViewById(R.id.cardTwoIV);
-        card3IV = (ImageView) findViewById(R.id.cardThreeIV);
-        card4IV = (ImageView) findViewById(R.id.cardFourIV);
-        card5IV = (ImageView) findViewById(R.id.cardFiveIV);
-        card6IV = (ImageView) findViewById(R.id.cardSixIV);
-
-        card1 = hand.getCard(0);
-        card2 = hand.getCard(1);
-        card3 = hand.getCard(2);
-        card4 = hand.getCard(3);
-        card5 = hand.getCard(4);
-        card6 = hand.getCard(5);
-
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card1.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card2.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card3.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card4.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card5.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card5IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card6.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card6IV);
+        // Get the hand
+        jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("deal", "deal");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
         int dpValue = 20; // margin in dips
         float d = this.getResources().getDisplayMetrics().density;
@@ -226,4 +220,69 @@ public class Discard_Activity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onStateChanged(GameManagerState gameManagerState, GameManagerState gameManagerState1) {
+
+    }
+
+    @Override
+    public void onGameMessageReceived(String playerId, JSONObject message) {
+
+        if(message.has("dealer")){
+            try {
+                dealer = message.getString("dealer");
+                TextView msg = (TextView) findViewById(R.id.discardMsg);
+                msg.setText("Select two cards for " + dealer + "'s crib");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else if (message.has("card1")) {
+            try {
+                String code1 = message.getString("card1");
+                String code2 = message.getString("card2");
+                String code3 = message.getString("card3");
+                String code4 = message.getString("card4");
+                String code5 = message.getString("card5");
+                String code6 = message.getString("card6");
+
+                hand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
+                hand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
+                hand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
+                hand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
+                hand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
+                hand.addCard(new Card(String.valueOf(code6.charAt(0)),String.valueOf(code6.charAt(1))));
+                hand.sortByValue();
+
+                card1IV = (ImageView) findViewById(R.id.cardOneIV);
+                card2IV = (ImageView) findViewById(R.id.cardTwoIV);
+                card3IV = (ImageView) findViewById(R.id.cardThreeIV);
+                card4IV = (ImageView) findViewById(R.id.cardFourIV);
+                card5IV = (ImageView) findViewById(R.id.cardFiveIV);
+                card6IV = (ImageView) findViewById(R.id.cardSixIV);
+
+                card1 = hand.getCard(0);
+                card2 = hand.getCard(1);
+                card3 = hand.getCard(2);
+                card4 = hand.getCard(3);
+                card5 = hand.getCard(4);
+                card6 = hand.getCard(5);
+
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card1.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card2.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card3.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card4.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card5.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card5IV);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card6.getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card6IV);
+
+            } catch (JSONException e) {
+                Log.e("json", "onGameMessageReceived", e);
+            }
+        } else if(message.has("toPegging")) {
+            Intent intent = new Intent(this, Deal_Activity.class);
+            startActivity(intent);
+        }
+    }
+
 }

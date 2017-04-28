@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.cast.games.GameManagerState;
 import com.squareup.picasso.Picasso;
 
-public class Pegging_Activity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Pegging_Activity extends AppCompatActivity implements GameManagerClient.Listener {
 
     Hand hand;
     Boolean yourTurn = true;
@@ -35,6 +41,8 @@ public class Pegging_Activity extends AppCompatActivity {
         toolbar.setTitle("Chromecast Cribbage");
         setSupportActionBar(toolbar);
 
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
+
         hand = new Hand();
 
         Bundle prev = getIntent().getExtras();
@@ -44,10 +52,10 @@ public class Pegging_Activity extends AppCompatActivity {
         cardName4 = prev.getString("card4");
 
 
-        hand.addCard(new Card(String.valueOf(cardName1.charAt(0)),String.valueOf(cardName1.charAt(1))));
-        hand.addCard(new Card(String.valueOf(cardName2.charAt(0)),String.valueOf(cardName2.charAt(1))));
-        hand.addCard(new Card(String.valueOf(cardName3.charAt(0)),String.valueOf(cardName3.charAt(1))));
-        hand.addCard(new Card(String.valueOf(cardName4.charAt(0)),String.valueOf(cardName4.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName1.charAt(0)), String.valueOf(cardName1.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName2.charAt(0)), String.valueOf(cardName2.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName3.charAt(0)), String.valueOf(cardName3.charAt(1))));
+        hand.addCard(new Card(String.valueOf(cardName4.charAt(0)), String.valueOf(cardName4.charAt(1))));
         hand.sortByValue();
 
 
@@ -56,29 +64,34 @@ public class Pegging_Activity extends AppCompatActivity {
         card3IV = (ImageView) findViewById(R.id.cardThreeIV);
         card4IV = (ImageView) findViewById(R.id.cardFourIV);
 
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName1+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName2+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName3+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cardName4+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cardName1 + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cardName2 + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cardName3 + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3IV);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cardName4 + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
 
         turnText = (TextView) findViewById(R.id.turnText);
 
+        // Get the dealer
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("getDealer", "dealer");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
         //TODO: Get whos turn it is to peg
-        if(yourTurn){
+        if (yourTurn) {
             turnText.setText("Its your turn to select a card for pegging");
         }
 
     }
 
-    public void waiting(){
+    public void waiting() {
         //TODO: Get whos turn it is to peg
         String userName = "temp";
 
-        if(yourTurn){
-            turnText.setText("Its your turn to select a card for pegging");
-        } else {
-            turnText.setText("Its " + userName + " turn to select a card for pegging");
-        }
     }
 
     public void playCard(View view) {
@@ -109,38 +122,69 @@ public class Pegging_Activity extends AppCompatActivity {
                     break;
             }
 
-            //TODO: Send playCard to Chromecast
-            turnText.setText("Its USERNAME's turn to select a card for pegging");
-            //yourTurn = false;
-        }
-        else{
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("pegCard", playCard);
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
+            yourTurn = false;
+        } else {
             Toast.makeText(this, "Its not your turn", Toast.LENGTH_LONG).show();
         }
 
-        if(count == 0){
-            //TODO: Get turn card from Chromecast and add it to hand
+        if (count == 0) {
 
-            String turnCardCode = "JS";
-
-            hand.addCard(new Card(String.valueOf(turnCardCode.charAt(0)),String.valueOf(turnCardCode.charAt(1))));
-            hand.sortByValueLowHigh();
-
-            String countString = Counter.count(hand);
-
-            Intent intent = new Intent(this, Count_Screen_Activity.class);
-            intent.putExtra("card1", cardName1);
-            intent.putExtra("card2", cardName2);
-            intent.putExtra("card3", cardName3);
-            intent.putExtra("card4", cardName4);
-            intent.putExtra("turnCard", turnCardCode);
-            intent.putExtra("countString", countString);
-            //TODO: get the ok from Chromecast to move to next view
-            startActivity(intent);
-        } else {
-            waiting();
         }
+    }
 
+    @Override
+    public void onStateChanged(GameManagerState gameManagerState, GameManagerState gameManagerState1) {
 
+    }
 
+    @Override
+    public void onGameMessageReceived(String playerId, JSONObject message) {
+        if (message.has("turn")) {
+            try {
+                String turnUserName = message.getString("turn");
+                yourTurn = true;
+
+                // if(yourTurn){
+                //  turnText.setText("Its your turn to select a card for pegging");
+                // } else {
+                turnText.setText("Its " + turnUserName + " turn to select a card for pegging");
+                // }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            yourTurn = true;
+        } else if (message.has("toCountScreen")) {
+            //TODO: Get turn card from Chromecast and add it to hand
+            try {
+                String turnCardCode = message.getString("toCountScreen");
+
+                hand.addCard(new Card(String.valueOf(turnCardCode.charAt(0)), String.valueOf(turnCardCode.charAt(1))));
+                hand.sortByValueLowHigh();
+
+                String countString = Counter.count(hand);
+
+                Intent intent = new Intent(this, Count_Screen_Activity.class);
+                intent.putExtra("card1", cardName1);
+                intent.putExtra("card2", cardName2);
+                intent.putExtra("card3", cardName3);
+                intent.putExtra("card4", cardName4);
+                intent.putExtra("turnCard", turnCardCode);
+                intent.putExtra("countString", countString);
+                //TODO: get the ok from Chromecast to move to next view
+                startActivity(intent);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

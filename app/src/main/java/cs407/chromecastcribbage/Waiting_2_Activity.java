@@ -55,6 +55,7 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
         waiting();
 
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
+
     }
 
     public void waiting() {
@@ -88,7 +89,6 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
     }
 
     public void startGame(View view) {
-        //sendPlayerPlayingRequest();
 
         JSONObject jsonMessage = new JSONObject();
         try {
@@ -119,39 +119,14 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
                     playerTwo.setVisibility(View.VISIBLE);
                     playerTwo.setText(player2);
                 }
-                
+
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
-                playerFour.setText("SHIT");
             }
+        } else if(message.has("startGame")){
+            Intent intent = new Intent(this, Find_Dealer_Activity.class);
+            startActivity(intent);
         }
     }
 
-/*    public void sendPlayerPlayingRequest() {
-        final GameManagerClient gameManagerClient =
-                mCastConnectionManager.getGameManagerClient();
-        if (mCastConnectionManager.isConnectedToReceiver()) {
-            PendingResult<GameManagerClient.GameManagerResult> result =
-                    gameManagerClient.sendPlayerPlayingRequest(null);
-            result.setResultCallback(
-                    new ResultCallback<GameManagerClient.GameManagerResult>() {
-                        @Override
-                        public void onResult(final GameManagerClient.GameManagerResult
-                                                     gameManagerResult) {
-                            if (gameManagerResult.getStatus().isSuccess()) {
-                               // ((MainActivity) getActivity()).setPlayerState(
-                                 //       gameManagerClient.getCurrentState().getPlayer(
-                                   //             gameManagerResult.getPlayerId())
-                                     //           .getPlayerState());
-                            } else {
-                                //mCastConnectionManager.disconnectFromReceiver(false);
-                                //Utils.showErrorDialog(getActivity(),
-                                      //  gameManagerResult.getStatus().getStatusMessage());
-
-
-                            }
-                        }
-                    });
-        }
-    }*/
 }
