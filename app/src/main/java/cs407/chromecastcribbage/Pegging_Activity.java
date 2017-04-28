@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class Pegging_Activity extends AppCompatActivity implements GameManagerClient.Listener {
 
     Hand hand;
-    Boolean yourTurn = true;
+    Boolean yourTurn = false;
     TextView turnText;
     int count = 4;
     String cardName1;
@@ -80,11 +80,8 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             return;
         }
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+        turnText.setText("Waiting for Everyone to Finish Discarding");
 
-        //TODO: Get whos turn it is to peg
-        if (yourTurn) {
-            turnText.setText("Its your turn to select a card for pegging");
-        }
 
     }
 
@@ -160,6 +157,7 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                     yourTurn = true;
                 } else {
                     turnText.setText("Its " + turnUserName + " turn to select a card for pegging");
+                    yourTurn = false;
                 }
 
             } catch (JSONException e) {

@@ -84,11 +84,6 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             Toast.makeText(this, "You need to select 2 cards for the crib", Toast.LENGTH_LONG).show();
 
         } else {
-            Intent intent = new Intent(this, Pegging_Activity.class);
-            intent.putExtra("card1", hand.getCard(0).getFileName());
-            intent.putExtra("card2", hand.getCard(1).getFileName());
-            intent.putExtra("card3", hand.getCard(2).getFileName());
-            intent.putExtra("card4", hand.getCard(3).getFileName());
 
             //TODO: Send Crib Cards to the Chromecast
 
@@ -103,7 +98,6 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
-            startActivity(intent);
         }
     }
 
@@ -293,7 +287,11 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
                 Log.e("json", "onGameMessageReceived", e);
             }
         } else if(message.has("toPeggingScreen")) {
-            Intent intent = new Intent(this, Deal_Activity.class);
+            Intent intent = new Intent(this, Pegging_Activity.class);
+            intent.putExtra("card1", hand.getCard(0).getFileName());
+            intent.putExtra("card2", hand.getCard(1).getFileName());
+            intent.putExtra("card3", hand.getCard(2).getFileName());
+            intent.putExtra("card4", hand.getCard(3).getFileName());
             startActivity(intent);
         } else if((message.has("sendP2Hand"))){
             // Get the hand

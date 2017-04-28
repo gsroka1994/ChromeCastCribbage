@@ -59,7 +59,7 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/cherry"
         android:onClick="welcomeMove"
-        android:text="Join Loby"
+        android:text="Join Lobby"
         android:visibility="invisible"
         android:textColor="@color/icons"
         android:textSize="24sp" />

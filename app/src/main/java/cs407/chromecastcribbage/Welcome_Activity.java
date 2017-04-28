@@ -167,7 +167,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
                         mPlayerState = gameManagerClient.getCurrentState().getPlayer(
                                 gameManagerResult.getPlayerId()).getPlayerState();
 
-                        statusMessage.setText("Great! Join the Loby when you are Ready.");
+                        statusMessage.setText("Great! Join the Lobby when you are Ready.");
                         joinLobyButton.setVisibility(View.VISIBLE);
 
                     } else {
