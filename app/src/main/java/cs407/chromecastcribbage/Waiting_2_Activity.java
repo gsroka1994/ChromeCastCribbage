@@ -114,10 +114,10 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
                 String player1 = message.getString("player1");
                 String player2 = message.getString("player2");
 
-                playerOne.setText(player1);
+                playerOne.setText("Player 1: " + player1);
                 if(!player2.equals("")){
                     playerTwo.setVisibility(View.VISIBLE);
-                    playerTwo.setText(player2);
+                    playerTwo.setText("Player 2: " + player2);
                 }
 
             } catch (JSONException e) {
