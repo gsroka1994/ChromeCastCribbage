@@ -253,7 +253,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
                 hand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
                 hand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
                 hand.addCard(new Card(String.valueOf(code6.charAt(0)),String.valueOf(code6.charAt(1))));
-                hand.sortByValue();
+                hand.sortByValueLowHigh();
 
                 card1IV = (ImageView) findViewById(R.id.cardOneIV);
                 card2IV = (ImageView) findViewById(R.id.cardTwoIV);

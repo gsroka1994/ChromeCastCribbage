@@ -124,7 +124,7 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
 
             JSONObject jsonMessage = new JSONObject();
             try {
-                jsonMessage.put("pegCard", playCard);
+                jsonMessage.put("pegCard", playCard.getFileName());
             } catch (JSONException e) {
                 Log.e("json", "Error creating JSON message", e);
                 return;
