@@ -52,15 +52,16 @@
         android:layout_height="50dp" />
 
     <Button
-        android:id="@+id/chromeCastName"
+        android:id="@+id/joinLobyButton"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textColor="@color/icons"
         android:background="@drawable/cherry"
-        android:textSize="24sp"
-        android:text="Get Started"
-        android:onClick="welcomeMove"/>
+        android:onClick="welcomeMove"
+        android:text="Join Loby"
+        android:visibility="invisible"
+        android:textColor="@color/icons"
+        android:textSize="24sp" />
 
 </LinearLayout>

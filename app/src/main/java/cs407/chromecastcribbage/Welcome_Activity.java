@@ -40,6 +40,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
     private int mPlayerState = GameManagerClient.PLAYER_STATE_UNKNOWN;
     private String mPlayerName;
     TextView statusMessage;
+    Button joinLobyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
 
-        Button chromeCastName = (Button) findViewById(R.id.chromeCastName);
+        joinLobyButton = (Button) findViewById(R.id.joinLobyButton);
 
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String defaultValue = "";
@@ -59,13 +60,6 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
         userNameET.setText(userName);
 
         statusMessage = (TextView) findViewById(R.id.statusMessage);
-
-        //TODO: Call receiver to see if any games are waiting for players
-        boolean connect = false;
-        if(connect){
-            String name = "Connect To Game";
-            chromeCastName.setText(name);
-        }
 
         mCastConnectionManager = new CastConnectionManager(this, "A7E2DC4A");
 
@@ -173,7 +167,8 @@ public class Welcome_Activity extends AppCompatActivity implements Observer {
                         mPlayerState = gameManagerClient.getCurrentState().getPlayer(
                                 gameManagerResult.getPlayerId()).getPlayerState();
 
-                        statusMessage.setText("Great! Click Get Started to Continue");
+                        statusMessage.setText("Great! Join the Loby when you are Ready.");
+                        joinLobyButton.setVisibility(View.VISIBLE);
 
                     } else {
                         mCastConnectionManager.disconnectFromReceiver(false);

@@ -31,7 +31,14 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
         setSupportActionBar(toolbar);
 
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
-
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("getDealerCard", "card");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
 
     }
@@ -41,17 +48,24 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
         if(!selected){
             selected = true;
 
+            ImageView cardIV = (ImageView) findViewById(R.id.cardIV);
+            cardIV.bringToFront();
+
+            Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card+".png").placeholder(R.drawable.back).error(R.drawable.error).into(cardIV);
+
+            cardIV.setVisibility(View.VISIBLE);
+
+            ImageView selectedCard = (ImageView) findViewById(view.getId());
+            selectedCard.setVisibility(View.INVISIBLE);
+
             JSONObject jsonMessage = new JSONObject();
             try {
-                jsonMessage.put("getDealerCard", "card");
+                jsonMessage.put("toDealScreen", "toDealScreen");
             } catch (JSONException e) {
                 Log.e("json", "Error creating JSON message", e);
                 return;
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
-
-            ImageView selectedCard = (ImageView) findViewById(view.getId());
-            selectedCard.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -60,13 +74,6 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
         if (message.has("code")) {
             try {
                 card = message.getString("code");
-                ImageView cardIV = (ImageView) findViewById(R.id.cardIV);
-                cardIV.bringToFront();
-
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+card+".png").placeholder(R.drawable.back).error(R.drawable.error).into(cardIV);
-
-                cardIV.setVisibility(View.VISIBLE);
-
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
             }

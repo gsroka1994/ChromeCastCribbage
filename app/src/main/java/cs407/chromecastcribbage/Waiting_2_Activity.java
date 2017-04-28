@@ -28,6 +28,7 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
     TextView playerTwo;
     TextView playerThree;
     TextView playerFour;
+    Button startButton;
     Bundle prev;
     int numPlayers;
     //private static CastConnectionManager mCastConnectionManager;
@@ -51,41 +52,19 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
         //numPlayers = 3;//prev.getInt("players");
 
         //mCastConnectionManager = Welcome_Activity.getCastConnectionManager();
-
-        waiting();
+        startButton = (Button) findViewById(R.id.startButton);
 
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
 
-    }
-
-    public void waiting() {
-
-        boolean playersReady = true;
-        //TODO: Get player1 username from Chromecast and set it
-/*        String player1 = "temp";
-        playerOne.setText("   Player 1: " + player1);
-
-        if(numPlayers == 3){
-            playerThree.setVisibility(View.VISIBLE);
-        } else if(numPlayers == 4){
-            playerThree.setVisibility(View.VISIBLE);
-            playerFour.setVisibility(View.VISIBLE);
-
-            playerOne.setText("   Team 1: " + player1);
-            playerTwo.setText("   Team 1: (Waiting for Player)");
-            playerThree.setText("   Team 2: (Waiting for Player)");
-            playerFour.setText("   Team 2: (Waiting for Player)");
-        }*/
-
-        //TODO: Get Player UserIds from Chromecast and set text views to names
-        //TODO: When all spots are filled give start button to Player 1?  All Players?
-
-
-
-        if(playersReady){
-            Button button = (Button) findViewById(R.id.startButton);
-            button.setVisibility(View.VISIBLE);
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("getPlayers", "yes");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
         }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
     }
 
     public void startGame(View view) {
@@ -118,6 +97,7 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
                 if(!player2.equals("")){
                     playerTwo.setVisibility(View.VISIBLE);
                     playerTwo.setText("Player 2: " + player2);
+                    startButton.setVisibility(View.VISIBLE);
                 }
 
             } catch (JSONException e) {
