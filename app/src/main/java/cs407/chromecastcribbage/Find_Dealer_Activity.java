@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
+
 public class Find_Dealer_Activity extends AppCompatActivity implements GameManagerClient.Listener{
 
     boolean selected = false;
@@ -69,8 +71,9 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
                 Log.e("json", "onGameMessageReceived", e);
             }
         } else if(message.has("toDealScreen")) {
+
             try {
-                wait(10000);
+                sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
