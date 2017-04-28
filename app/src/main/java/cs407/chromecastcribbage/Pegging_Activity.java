@@ -71,10 +71,10 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
 
         turnText = (TextView) findViewById(R.id.turnText);
 
-        // Get the dealer
+        // Get the currentTurn
         JSONObject jsonMessage = new JSONObject();
         try {
-            jsonMessage.put("getDealer", "dealer");
+            jsonMessage.put("getTurn", "turn");
         } catch (JSONException e) {
             Log.e("json", "Error creating JSON message", e);
             return;
@@ -124,7 +124,8 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
 
             JSONObject jsonMessage = new JSONObject();
             try {
-                jsonMessage.put("pegCard", playCard.getFileName());
+                jsonMessage.put("pegging", "Yes");
+                jsonMessage.put("pegCard", playCard.getIntValue());
             } catch (JSONException e) {
                 Log.e("json", "Error creating JSON message", e);
                 return;
@@ -151,18 +152,18 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
         if (message.has("turn")) {
             try {
                 String turnUserName = message.getString("turn");
-                yourTurn = true;
+                String playerUserName = message.getString("player");
 
-                // if(yourTurn){
-                //  turnText.setText("Its your turn to select a card for pegging");
-                // } else {
-                turnText.setText("Its " + turnUserName + " turn to select a card for pegging");
-                // }
+                if (turnUserName.equals(playerUserName)) {
+                    turnText.setText("Its your turn to select a card for pegging");
+                    yourTurn = true;
+                } else {
+                    turnText.setText("Its " + turnUserName + " turn to select a card for pegging");
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            yourTurn = true;
         } else if (message.has("toCountScreen")) {
             //TODO: Get turn card from Chromecast and add it to hand
             try {
@@ -172,6 +173,18 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                 hand.sortByValueLowHigh();
 
                 String countString = Counter.count(hand);
+                String[] score = countString.split("Total Score: ");
+
+                JSONObject jsonMessage = new JSONObject();
+                try {
+                    jsonMessage.put("count", "Yes");
+                    jsonMessage.put("handCountString", score[0]);
+                    jsonMessage.put("handCount", score[1]);
+                } catch (JSONException e) {
+                    Log.e("json", "Error creating JSON message", e);
+                    return;
+                }
+                Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
                 Intent intent = new Intent(this, Count_Screen_Activity.class);
                 intent.putExtra("card1", cardName1);
@@ -180,7 +193,6 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                 intent.putExtra("card4", cardName4);
                 intent.putExtra("turnCard", turnCardCode);
                 intent.putExtra("countString", countString);
-                //TODO: get the ok from Chromecast to move to next view
                 startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();

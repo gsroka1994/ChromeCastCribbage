@@ -100,6 +100,17 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
 
             //TODO: Send Crib Cards to the Chromecast
 
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("cribSet", "Yes");
+                jsonMessage.put("crib1", crib.getCard(0).getFileName());
+                jsonMessage.put("crib2", crib.getCard(1).getFileName());
+            } catch (JSONException e) {
+                Log.e("json", "Error creating JSON message", e);
+                return;
+            }
+            Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
             startActivity(intent);
         }
     }
@@ -107,7 +118,6 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
     public void addCardToCrib(View view) {
 
         LinearLayout.LayoutParams rel_btn;
-
 
         switch (view.getId()) {
             case R.id.cardOneIV:
@@ -279,7 +289,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             } catch (JSONException e) {
                 Log.e("json", "onGameMessageReceived", e);
             }
-        } else if(message.has("toPegging")) {
+        } else if(message.has("toPeggingScreen")) {
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
         }
