@@ -168,30 +168,13 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             try {
                 String turnCardCode = message.getString("toCountScreen");
 
-                hand.addCard(new Card(String.valueOf(turnCardCode.charAt(0)), String.valueOf(turnCardCode.charAt(1))));
-                hand.sortByValueLowHigh();
-
-                String countString = Counter.count(hand);
-                String[] score = countString.split("Total Score: ");
-
-                JSONObject jsonMessage = new JSONObject();
-                try {
-                    jsonMessage.put("count", "Yes");
-                    jsonMessage.put("handCountString", score[0]);
-                    jsonMessage.put("handCount", score[1]);
-                } catch (JSONException e) {
-                    Log.e("json", "Error creating JSON message", e);
-                    return;
-                }
-                Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
-
                 Intent intent = new Intent(this, Count_Screen_Activity.class);
                 intent.putExtra("card1", cardName1);
                 intent.putExtra("card2", cardName2);
                 intent.putExtra("card3", cardName3);
                 intent.putExtra("card4", cardName4);
                 intent.putExtra("turnCard", turnCardCode);
-                intent.putExtra("countString", countString);
+                //intent.putExtra("countString", countString);
                 startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();

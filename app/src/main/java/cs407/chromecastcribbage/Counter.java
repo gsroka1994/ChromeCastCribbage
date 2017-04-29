@@ -41,12 +41,19 @@ public class Counter {
         boolean runFour = false;
         int numberOfThreeRun = 0;
         boolean triRun = false;
+        //String msg = "";
+
+        /*msg = msg + hand.getCard(0).getIntSuit();
+        msg = msg + hand.getCard(1).getIntSuit();
+        msg = msg + hand.getCard(2).getIntSuit();
+        msg = msg + hand.getCard(3).getIntSuit();
+        msg = msg + hand.getCard(4).getIntSuit();*/
 
         //Pairs and Stuff
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
-            if (hashMap.containsKey(hand.getCard(i).getValue())) {
-                hashMap.put(hand.getCard(i).getIntValue(), hashMap.get(hand.getCard(i).getValue()) + 1);
+            if (hashMap.containsKey(hand.getCard(i).getIntValue())) {
+                hashMap.put(hand.getCard(i).getIntValue(), hashMap.get(hand.getCard(i).getIntValue()) + 1);
             } else {
                 hashMap.put(hand.getCard(i).getIntValue(), 1);
             }
@@ -189,7 +196,7 @@ public class Counter {
             }
         }
         run=0;
-        if (cardSet.size() >= 3 && !runFour) {
+        if (cardSet.size() >= 3 && !runFour && !runFive) {
             for (int i = 1; i < cards.size(); i++) {
                 if ((cards.get(i - 1) + 1) == cards.get(i)) {
                     run += 1;
@@ -226,7 +233,7 @@ public class Counter {
                 + runOfThreeCount + " Run of three for " + runOfThree + "\n"
                 + "Run of five for " + runOfFive + "\n"
                 + "Flush for " + flushScore + "\n"
-                + "Nobs for " + nobs + "\n"
+                + "Nobs for " + nobs + "\n"// + msg +"\n"
                 + "Total Score: " + totalScore;
     }
 
