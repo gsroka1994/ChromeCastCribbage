@@ -30,7 +30,6 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
     Hand hand;
     Hand cribHand;
     Button confirmButton;
-    boolean yourTurn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +120,6 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         JSONObject jsonMessage = new JSONObject();
         try {
             jsonMessage.put("move", "Next");
-            yourTurn = false;
         } catch (JSONException e) {
             Log.e("json", "Error creating JSON message", e);
             return;
@@ -143,13 +141,12 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 if(msg.equals("Crib")){
                     confirmButton.setText("Confirm the Crib Shown");
                 }
-                yourTurn = true;
                 confirmButton.setVisibility(View.VISIBLE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else if(message.has("cribCard1") && yourTurn){
+        } else if(message.has("cribCard1")){
 
             try {
                 String code1 = message.getString("cribCard1");
