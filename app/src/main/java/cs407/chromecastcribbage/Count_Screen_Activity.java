@@ -185,8 +185,9 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
+        }  else if(message.has("toDealScreen")) {
+            Intent intent = new Intent(this, Deal_Activity.class);
+            startActivity(intent);
         }
     }
 
