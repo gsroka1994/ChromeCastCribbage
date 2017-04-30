@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,8 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
     TextView countView2;
     TextView totalScore;
     Hand hand;
+    Hand cribHand;
+    Button confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         countView2 = (TextView) findViewById(R.id.countString2);
         totalScore = (TextView) findViewById(R.id.totalScore1);
         hand = new Hand();
+        cribHand = new Hand();
 
         String code1 = prev.getString("card1");
         String code2 = prev.getString("card2");
@@ -70,13 +75,13 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
 
         hand.sortByValueLowHigh();
 
-        String countString = Counter.count(hand);
+
         //String[] score = countString.split("Total Score: ");
 
+        confirmButton = (Button) findViewById(R.id.confirmHandButton);
 
 
-
-
+        String countString = Counter.count(hand);
         //String countString = prev.getString("countString");
         String[] score = countString.split("\n");
         String breakdown1 = "";
@@ -118,16 +123,82 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
 
     @Override
     public void onGameMessageReceived(String playerId, JSONObject message) {
-        if (message.has("turn")) {
+        if (message.has("yourTurn")) {
             try {
-                String turnUserName = message.getString("turn");
-                String playerUserName = message.getString("player");
+                String msg = message.getString("yourTurn");
+                if(msg.equals("Crib")){
+                    confirmButton.setText("Confirm the Crib Shown");
+                }
+                confirmButton.setVisibility(View.VISIBLE);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else if(message.has("cribCard1")){
+
+            try {
+                String code1 = message.getString("cribCard1");
+                String code2 = message.getString("cribCard1");
+                String code3 = message.getString("cribCard1");
+                String code4 = message.getString("cribCard1");
+                String code5 = message.getString("cribCard1");
+
+                cribHand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
+                hand.sortByValueLowHigh();
+
+                String countString = Counter.count(cribHand);
+                String[] score = countString.split("\n");
+                String breakdown1 = "";
+                String breakdown2 = "";
+                int counter = 0;
+                for(String line : score){
+                    if(!line.endsWith("0") && !line.startsWith("Total Score: ")){
+                        if(counter < 5){
+                            breakdown1 = breakdown1 + line + "\n";
+                        } else{
+                            breakdown2 = breakdown2 + line + "\n";
+                        }
+                    }
+                }
+                countView1.setText(breakdown1);
+                countView2.setText(breakdown2);
+                String[] count = score[9].split("Total Score: ");
+                totalScore.setText(count[1]);
+
+
+                JSONObject jsonMessage = new JSONObject();
+                try {
+                    jsonMessage.put("crib", "Yes");
+                    jsonMessage.put("handCountString", breakdown1+breakdown2);
+                    jsonMessage.put("handCount", count[1]);
+                } catch (JSONException e) {
+                    Log.e("json", "Error creating JSON message", e);
+                    return;
+                }
+                Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
         }
     }
 
+    public void confirmHand(View view) {
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("move", "Next");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+        confirmButton.setVisibility(View.INVISIBLE);
+    }
 }
