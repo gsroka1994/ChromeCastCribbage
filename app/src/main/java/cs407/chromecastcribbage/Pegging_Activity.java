@@ -203,19 +203,19 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                 //Logic to check if player can play a card or if its a go.
                 if(yourTurn){
                     go = 4;
-                    if((card1IV.getVisibility() == View.VISIBLE) && (hand.getCard(0).getIntValue()+currentCount <= 31)){
+                    if((card1IV.getVisibility() == View.VISIBLE) && (hand.getCard(0).getIntValuePeg()+currentCount <= 31)){
                         go--;
                         goodCards.add(hand.getCard(0).getIntValue());
                     }
-                    if((card2IV.getVisibility() == View.VISIBLE) && (hand.getCard(1).getIntValue()+currentCount <= 31)){
+                    if((card2IV.getVisibility() == View.VISIBLE) && (hand.getCard(1).getIntValuePeg()+currentCount <= 31)){
                         go--;
                         goodCards.add(hand.getCard(1).getIntValue());
                     }
-                    if((card3IV.getVisibility() == View.VISIBLE) && (hand.getCard(2).getIntValue()+currentCount <= 31)){
+                    if((card3IV.getVisibility() == View.VISIBLE) && (hand.getCard(2).getIntValuePeg()+currentCount <= 31)){
                         go--;
                         goodCards.add(hand.getCard(2).getIntValue());
                     }
-                    if((card4IV.getVisibility() == View.VISIBLE) && (hand.getCard(3).getIntValue()+currentCount <= 31)){
+                    if((card4IV.getVisibility() == View.VISIBLE) && (hand.getCard(3).getIntValuePeg()+currentCount <= 31)){
                         go--;
                         goodCards.add(hand.getCard(3).getIntValue());
                     }
