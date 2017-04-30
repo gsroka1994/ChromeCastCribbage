@@ -29,8 +29,7 @@
         android:textColor="@color/icons"
         android:background="@drawable/cherry"
         android:gravity="center_vertical"
-        android:textSize="24sp"
-        android:text="   Player 1:" />
+        android:textSize="24sp"/>
 
     <Space
         android:layout_width="match_parent"
@@ -44,8 +43,7 @@
         android:background="@drawable/cherry"
         android:gravity="center_vertical"
         android:textSize="24sp"
-        android:visibility="invisible"
-        android:text="   Player 2: (Waiting for Player)" />
+        android:visibility="invisible"/>
 
     <Space
         android:layout_width="match_parent"
@@ -59,8 +57,7 @@
         android:background="@drawable/cherry"
         android:gravity="center_vertical"
         android:textSize="24sp"
-        android:visibility="invisible"
-        android:text="   Player 3: (Waiting for Player)" />
+        android:visibility="invisible"/>
 
     <Space
         android:layout_width="match_parent"
@@ -74,8 +71,7 @@
         android:background="@drawable/cherry"
         android:gravity="center_vertical"
         android:textSize="24sp"
-        android:visibility="invisible"
-        android:text="   Player 4: (Waiting for Player)" />
+        android:visibility="invisible"/>
 
     <Space
         android:layout_width="match_parent"

@@ -19,8 +19,7 @@
         android:paddingBottom="35dp"
         android:gravity="center"
         android:textSize="40dp"
-        android:textColor="#212121"
-        android:text="Its your deal when you are ready!" />
+        android:textColor="#212121" />
 
     <Button
         android:id="@+id/dealButton"
@@ -32,6 +31,7 @@
         android:textColor="@color/icons"
         android:gravity="center"
         android:textSize="36dp"
+        android:visibility="invisible"
         android:onClick="dealCards"
         android:text="DEAL" />
 </LinearLayout>

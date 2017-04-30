@@ -1,5 +1,6 @@
 package cs407.chromecastcribbage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,12 +8,14 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.cast.games.GameManagerState;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Count_Screen_Activity extends AppCompatActivity {
+public class Count_Screen_Activity extends AppCompatActivity implements GameManagerClient.Listener{
 
     ImageView card1;
     ImageView card2;
@@ -31,6 +34,8 @@ public class Count_Screen_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("ChromeCast Cribbage");
         setSupportActionBar(toolbar);
+
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
 
         Bundle prev = getIntent().getExtras();
 
@@ -103,9 +108,26 @@ public class Count_Screen_Activity extends AppCompatActivity {
         }
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
-
-
         //TODO: When the Chromecast is ready move to the deal screen
+    }
+
+    @Override
+    public void onStateChanged(GameManagerState gameManagerState, GameManagerState gameManagerState1) {
+
+    }
+
+    @Override
+    public void onGameMessageReceived(String playerId, JSONObject message) {
+        if (message.has("turn")) {
+            try {
+                String turnUserName = message.getString("turn");
+                String playerUserName = message.getString("player");
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

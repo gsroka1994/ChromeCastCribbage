@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,12 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Pegging_Activity extends AppCompatActivity implements GameManagerClient.Listener {
 
@@ -32,6 +39,8 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
     ImageView card2IV;
     ImageView card3IV;
     ImageView card4IV;
+    Button goButton;
+    Set<Integer> goodCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +79,7 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
         Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cardName4 + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4IV);
 
         turnText = (TextView) findViewById(R.id.turnText);
-
+        goButton = (Button) findViewById(R.id.goButton);
 
         turnText.setText("Waiting for Everyone to Finish Discarding");
 
@@ -94,7 +103,22 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
     public void playCard(View view) {
         Card playCard = new Card();
 
-        if (yourTurn) {
+        switch (view.getId()) {
+            case R.id.cardOneIV:
+                playCard = hand.getCard(0);
+                break;
+            case R.id.cardTwoIV:
+                playCard = hand.getCard(1);
+                break;
+            case R.id.cardThreeIV:
+                playCard = hand.getCard(2);
+                break;
+            case R.id.cardFourIV:
+                playCard = hand.getCard(3);
+                break;
+        }
+
+        if (yourTurn && goodCards.contains(playCard.getIntValue())) {
 
             switch (view.getId()) {
                 case R.id.cardOneIV:
@@ -129,15 +153,26 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                 return;
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
-
+            goButton.setVisibility(View.INVISIBLE);
             yourTurn = false;
-        } else {
+        } else if(!yourTurn) {
             Toast.makeText(this, "Its not your turn", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Card is too Large for Current Count", Toast.LENGTH_LONG).show();
         }
+    }
 
-        if (count == 0) {
-
+    public void sendGo(View view) {
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("pegging", "Yes");
+            jsonMessage.put("go", "yes");
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
         }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+        goButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -151,6 +186,11 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             try {
                 String turnUserName = message.getString("turn");
                 String playerUserName = message.getString("player");
+                String currentCountString = message.getString("pileCount");
+                int currentCount = Integer.valueOf(currentCountString);
+                int go = 0;
+                goButton.setVisibility(View.INVISIBLE);
+                goodCards = new HashSet<>();
 
                 if (turnUserName.equals(playerUserName)) {
                     turnText.setText("Its your turn to select a card for pegging");
@@ -159,6 +199,35 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                     turnText.setText("Its " + turnUserName + " turn to select a card for pegging");
                     yourTurn = false;
                 }
+
+                //Logic to check if player can play a card or if its a go.
+                if(yourTurn){
+                    go = 4;
+                    if((card1IV.getVisibility() == View.VISIBLE) && (hand.getCard(0).getIntValue()+currentCount <= 31)){
+                        go--;
+                        goodCards.add(hand.getCard(0).getIntValue());
+                    }
+                    if((card2IV.getVisibility() == View.VISIBLE) && (hand.getCard(1).getIntValue()+currentCount <= 31)){
+                        go--;
+                        goodCards.add(hand.getCard(1).getIntValue());
+                    }
+                    if((card3IV.getVisibility() == View.VISIBLE) && (hand.getCard(2).getIntValue()+currentCount <= 31)){
+                        go--;
+                        goodCards.add(hand.getCard(2).getIntValue());
+                    }
+                    if((card4IV.getVisibility() == View.VISIBLE) && (hand.getCard(3).getIntValue()+currentCount <= 31)){
+                        go--;
+                        goodCards.add(hand.getCard(3).getIntValue());
+                    }
+
+
+                }
+
+                if(go == 4){
+                    goButton.setVisibility(View.VISIBLE);
+                }
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -191,4 +260,6 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
         }
     }
+
+
 }

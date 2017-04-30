@@ -92,7 +92,7 @@ public class Waiting_2_Activity extends AppCompatActivity implements GameManager
             try {
                 String player1 = message.getString("player1");
                 String player2 = message.getString("player2");
-
+                playerOne.setVisibility(View.VISIBLE);
                 playerOne.setText("Player 1: " + player1);
                 if(!player2.equals("")){
                     playerTwo.setVisibility(View.VISIBLE);
