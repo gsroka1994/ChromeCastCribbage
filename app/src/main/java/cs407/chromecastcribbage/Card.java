@@ -59,6 +59,30 @@ public class Card {
         return Integer.valueOf(stringValue);
     }
 
+    public int getIntValuePeg() {
+
+        String stringValue = value;
+        switch (stringValue) {
+            case "A":
+                stringValue = "1";
+                break;
+            case "0":
+                stringValue = "10";
+                break;
+            case "J":
+                stringValue = "10";
+                break;
+            case "Q":
+                stringValue = "10";
+                break;
+            case "K":
+                stringValue = "10";
+                break;
+        }
+        return Integer.valueOf(stringValue);
+    }
+
+
     public String getFileName() {
         return value + suit;
     }
