@@ -30,6 +30,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
     Hand hand;
     Hand cribHand;
     Button confirmButton;
+    TextView turnText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         //String[] score = countString.split("Total Score: ");
 
         confirmButton = (Button) findViewById(R.id.confirmHandButton);
+        turnText = (TextView) findViewById(R.id.turnText);
 
 
         String countString = Counter.count(hand);
@@ -189,6 +191,16 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 }
                 Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(0).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(1).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(2).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(3).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(4).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
+
+                countView1.setText(breakdown1);
+                countView2.setText(breakdown2);
+                totalScore.setText(count[1]);
+                turnText.setText("Your Crib Count");
 
             } catch (JSONException e) {
                 e.printStackTrace();
