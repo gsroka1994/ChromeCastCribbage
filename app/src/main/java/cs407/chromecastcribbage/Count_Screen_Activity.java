@@ -30,6 +30,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
     Hand hand;
     Hand cribHand;
     Button confirmButton;
+    boolean yourTurn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +117,19 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         //TODO: When the Chromecast is ready move to the deal screen
     }
 
+    public void confirmHand(View view) {
+        JSONObject jsonMessage = new JSONObject();
+        try {
+            jsonMessage.put("move", "Next");
+            yourTurn = false;
+        } catch (JSONException e) {
+            Log.e("json", "Error creating JSON message", e);
+            return;
+        }
+        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+        confirmButton.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public void onStateChanged(GameManagerState gameManagerState, GameManagerState gameManagerState1) {
 
@@ -129,19 +143,20 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 if(msg.equals("Crib")){
                     confirmButton.setText("Confirm the Crib Shown");
                 }
+                yourTurn = true;
                 confirmButton.setVisibility(View.VISIBLE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else if(message.has("cribCard1")){
+        } else if(message.has("cribCard1") && yourTurn){
 
             try {
                 String code1 = message.getString("cribCard1");
-                String code2 = message.getString("cribCard1");
-                String code3 = message.getString("cribCard1");
-                String code4 = message.getString("cribCard1");
-                String code5 = message.getString("cribCard1");
+                String code2 = message.getString("cribCard2");
+                String code3 = message.getString("cribCard3");
+                String code4 = message.getString("cribCard4");
+                String code5 = message.getString("cribCard5");
 
                 cribHand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
                 cribHand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
@@ -164,11 +179,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                         }
                     }
                 }
-                countView1.setText(breakdown1);
-                countView2.setText(breakdown2);
                 String[] count = score[9].split("Total Score: ");
-                totalScore.setText(count[1]);
-
 
                 JSONObject jsonMessage = new JSONObject();
                 try {
@@ -191,15 +202,5 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         }
     }
 
-    public void confirmHand(View view) {
-        JSONObject jsonMessage = new JSONObject();
-        try {
-            jsonMessage.put("move", "Next");
-        } catch (JSONException e) {
-            Log.e("json", "Error creating JSON message", e);
-            return;
-        }
-        Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
-        confirmButton.setVisibility(View.INVISIBLE);
-    }
+
 }
