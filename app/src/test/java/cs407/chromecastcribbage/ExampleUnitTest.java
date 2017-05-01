@@ -210,4 +210,30 @@ public class ExampleUnitTest {
         assertEquals(4, finalCount);
     }
 
+    @Test
+    public void nobs_isCorrect() throws Exception {
+
+        Card card1 = new Card("8","S");
+        Card card2 = new Card("2","S");
+        Card card3 = new Card("J","H");
+        Card card4 = new Card("0","S");
+        Card card5 = new Card("6","H");
+
+        Hand hand = new Hand();
+        hand.addCard(card1);
+        hand.addCard(card2);
+        hand.addCard(card3);
+        hand.addCard(card4);
+        hand.addCard(card5);
+
+        String countString = Counter.count(hand);
+        String[] count = countString.split("Total Score: ");
+        System.out.println(countString);
+
+        int finalCount = Integer.parseInt(count[1]);
+
+        assertEquals(1, finalCount);
+    }
+
+
 }

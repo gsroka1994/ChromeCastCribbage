@@ -74,7 +74,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(3).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
         Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(4).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
 
-        hand.sortByValueLowHigh();
+        //hand.sortByValueLowHigh();
 
 
         //String[] score = countString.split("Total Score: ");
@@ -162,7 +162,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 cribHand.addCard(new Card(String.valueOf(code3.charAt(0)), String.valueOf(code3.charAt(1))));
                 cribHand.addCard(new Card(String.valueOf(code4.charAt(0)), String.valueOf(code4.charAt(1))));
                 cribHand.addCard(new Card(String.valueOf(code5.charAt(0)), String.valueOf(code5.charAt(1))));
-                hand.sortByValueLowHigh();
+                //hand.sortByValueLowHigh();
 
                 String countString = Counter.count(cribHand);
                 String[] score = countString.split("\n");

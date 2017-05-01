@@ -73,7 +73,7 @@ public class Counter {
 
         //Check for Nobs
         for (int i = 0; i < 4; i++) {
-            if (hand.getCard(i).getIntValue() == 11 && hand.getCard(i).getSuit() == hand.getCard(4).getSuit()) {
+            if (hand.getCard(i).getIntValue() == 11 && hand.getCard(i).getIntSuit() == hand.getCard(4).getIntSuit()) {
                 nobs = 1;
             }
         }
