@@ -9,4 +9,5 @@
     <string name="title_activity_count__screen_">Count_Screen_Activity</string>
     <string name="title_activity_find__dealer_">Find_Dealer_Activity</string>
     <string name="userName">\"userName\"</string>
+    <string name="title_activity_winner_">Winner_Activity</string>
 </resources>

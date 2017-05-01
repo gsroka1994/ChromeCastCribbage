@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs407.chromecastcribbage">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -68,10 +70,17 @@
             android:name=".Find_Dealer_Activity"
             android:label="@string/title_activity_find__dealer_"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="cs407.chromecastcribbage.CastOptionsProvider" />
+
+        <activity
+            android:name=".Winner_Activity"
+            android:label="@string/title_activity_winner_"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

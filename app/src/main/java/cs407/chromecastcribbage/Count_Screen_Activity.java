@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Count_Screen_Activity extends AppCompatActivity implements GameManagerClient.Listener{
+public class Count_Screen_Activity extends AppCompatActivity implements GameManagerClient.Listener {
 
     ImageView card1;
     ImageView card2;
@@ -61,18 +61,18 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         String code4 = prev.getString("card4");
         String code5 = prev.getString("turnCard");
 
-        hand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
-        hand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code1.charAt(0)), String.valueOf(code1.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code2.charAt(0)), String.valueOf(code2.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code3.charAt(0)), String.valueOf(code3.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code4.charAt(0)), String.valueOf(code4.charAt(1))));
+        hand.addCard(new Card(String.valueOf(code5.charAt(0)), String.valueOf(code5.charAt(1))));
 
 
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(0).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(1).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(2).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(3).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
-        Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+hand.getCard(4).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(0).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(1).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(2).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(3).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
+        Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + hand.getCard(4).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
 
         hand.sortByValueLowHigh();
 
@@ -89,11 +89,11 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         String breakdown1 = "";
         String breakdown2 = "";
         int counter = 0;
-        for(String line : score){
-            if(!line.endsWith("0") && !line.startsWith("Total Score: ")){
-                if(counter < 5){
+        for (String line : score) {
+            if (!line.endsWith("0") && !line.startsWith("Total Score: ")) {
+                if (counter < 5) {
                     breakdown1 = breakdown1 + line + "\n";
-                } else{
+                } else {
                     breakdown2 = breakdown2 + line + "\n";
                 }
             }
@@ -107,7 +107,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         JSONObject jsonMessage = new JSONObject();
         try {
             jsonMessage.put("count", "Yes");
-            jsonMessage.put("handCountString", breakdown1+breakdown2);
+            jsonMessage.put("handCountString", breakdown1 + breakdown2);
             jsonMessage.put("handCount", count[1]);
         } catch (JSONException e) {
             Log.e("json", "Error creating JSON message", e);
@@ -140,7 +140,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
         if (message.has("yourTurn")) {
             try {
                 String msg = message.getString("yourTurn");
-                if(msg.equals("Crib")){
+                if (msg.equals("Crib")) {
                     confirmButton.setText("Confirm the Crib Shown");
                 }
                 confirmButton.setVisibility(View.VISIBLE);
@@ -148,7 +148,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else if(message.has("cribCard1")){
+        } else if (message.has("cribCard1")) {
 
             try {
                 String code1 = message.getString("cribCard1");
@@ -157,11 +157,11 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 String code4 = message.getString("cribCard4");
                 String code5 = message.getString("cribCard5");
 
-                cribHand.addCard(new Card(String.valueOf(code1.charAt(0)),String.valueOf(code1.charAt(1))));
-                cribHand.addCard(new Card(String.valueOf(code2.charAt(0)),String.valueOf(code2.charAt(1))));
-                cribHand.addCard(new Card(String.valueOf(code3.charAt(0)),String.valueOf(code3.charAt(1))));
-                cribHand.addCard(new Card(String.valueOf(code4.charAt(0)),String.valueOf(code4.charAt(1))));
-                cribHand.addCard(new Card(String.valueOf(code5.charAt(0)),String.valueOf(code5.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code1.charAt(0)), String.valueOf(code1.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code2.charAt(0)), String.valueOf(code2.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code3.charAt(0)), String.valueOf(code3.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code4.charAt(0)), String.valueOf(code4.charAt(1))));
+                cribHand.addCard(new Card(String.valueOf(code5.charAt(0)), String.valueOf(code5.charAt(1))));
                 hand.sortByValueLowHigh();
 
                 String countString = Counter.count(cribHand);
@@ -169,11 +169,11 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 String breakdown1 = "";
                 String breakdown2 = "";
                 int counter = 0;
-                for(String line : score){
-                    if(!line.endsWith("0") && !line.startsWith("Total Score: ")){
-                        if(counter < 5){
+                for (String line : score) {
+                    if (!line.endsWith("0") && !line.startsWith("Total Score: ")) {
+                        if (counter < 5) {
                             breakdown1 = breakdown1 + line + "\n";
-                        } else{
+                        } else {
                             breakdown2 = breakdown2 + line + "\n";
                         }
                     }
@@ -183,7 +183,7 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 JSONObject jsonMessage = new JSONObject();
                 try {
                     jsonMessage.put("crib", "Yes");
-                    jsonMessage.put("handCountString", breakdown1+breakdown2);
+                    jsonMessage.put("handCountString", breakdown1 + breakdown2);
                     jsonMessage.put("handCount", count[1]);
                 } catch (JSONException e) {
                     Log.e("json", "Error creating JSON message", e);
@@ -191,11 +191,11 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                 }
                 Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
 
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cribHand.getCard(0).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1);
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cribHand.getCard(1).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2);
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cribHand.getCard(2).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3);
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cribHand.getCard(3).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
-                Picasso.with(this).load("https://deckofcardsapi.com/static/img/"+cribHand.getCard(4).getFileName()+".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cribHand.getCard(0).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card1);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cribHand.getCard(1).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card2);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cribHand.getCard(2).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card3);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cribHand.getCard(3).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(card4);
+                Picasso.with(this).load("https://deckofcardsapi.com/static/img/" + cribHand.getCard(4).getFileName() + ".png").placeholder(R.drawable.back).error(R.drawable.error).into(turnCard);
 
                 countView1.setText(breakdown1);
                 countView2.setText(breakdown2);
@@ -205,9 +205,22 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }  else if(message.has("toDealScreen")) {
+        } else if (message.has("toDealScreen")) {
+
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
+
+        } else if (message.has("winner")) {
+            String winner = null;
+            try {
+                winner = message.getString("winner");
+                Intent intent = new Intent(this, Winner_Activity.class);
+                intent.putExtra("winner", winner);
+                startActivity(intent);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

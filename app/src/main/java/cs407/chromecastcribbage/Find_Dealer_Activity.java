@@ -80,6 +80,9 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
         } else if(message.has("toDealScreen")) {
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
+        } else if (message.has("sameHand")){
+            Intent intent = new Intent(this, Find_Dealer_Activity.class);
+            startActivity(intent);
         }
     }
 

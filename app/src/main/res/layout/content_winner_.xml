@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cs407.chromecastcribbage.Winner_Activity"
+    android:background="@drawable/oak1"
+    tools:showIn="@layout/activity_winner_">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/winnerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="42sp"
+        android:textColor="#212121"
+        android:text="WINNER!" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/newGameButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/cherry"
+        android:textColor="@color/icons"
+        android:gravity="center"
+        android:textSize="36dp"
+        android:onClick="newGame"
+        android:text="Start New Game" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>

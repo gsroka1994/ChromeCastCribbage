@@ -60,7 +60,6 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
         cardName3 = prev.getString("card3");
         cardName4 = prev.getString("card4");
 
-
         hand.addCard(new Card(String.valueOf(cardName1.charAt(0)), String.valueOf(cardName1.charAt(1))));
         hand.addCard(new Card(String.valueOf(cardName2.charAt(0)), String.valueOf(cardName2.charAt(1))));
         hand.addCard(new Card(String.valueOf(cardName3.charAt(0)), String.valueOf(cardName3.charAt(1))));
