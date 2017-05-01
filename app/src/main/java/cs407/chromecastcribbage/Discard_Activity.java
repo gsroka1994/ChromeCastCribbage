@@ -18,6 +18,9 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Discard_Activity extends AppCompatActivity implements GameManagerClient.Listener{
 
     Hand hand;
@@ -37,6 +40,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
     Boolean selected6 = false;
     String dealer = null;
     int margin;
+    Set<Integer> cribCardPos;
 
     ImageView card1IV;
     ImageView card2IV;
@@ -56,6 +60,7 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
         Welcome_Activity.mCastConnectionManager.getGameManagerClient().setListener(this);
 
         hand = new Hand();
+        cribCardPos = new HashSet<>();
 
         //TODO: Get Cards codes from the chromecast
 
@@ -84,6 +89,31 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
             Toast.makeText(this, "You need to select 2 cards for the crib", Toast.LENGTH_LONG).show();
 
         } else {
+            for(int i : cribCardPos){
+                crib.addCard(hand.getCard(i));
+            }
+            for(int i : cribCardPos) {
+                switch (i) {
+                    case 0:
+                        hand.removeCard(card1);
+                        break;
+                    case 1:
+                        hand.removeCard(card2);
+                        break;
+                    case 2:
+                        hand.removeCard(card3);
+                        break;
+                    case 3:
+                        hand.removeCard(card4);
+                        break;
+                    case 4:
+                        hand.removeCard(card5);
+                        break;
+                    case 5:
+                        hand.removeCard(card6);
+                        break;
+                }
+            }
 
             //TODO: Send Crib Cards to the Chromecast
 
@@ -97,6 +127,8 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
                 return;
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+
+
 
             Intent intent = new Intent(this, Pegging_Activity.class);
             intent.putExtra("card1", hand.getCard(0).getFileName());
@@ -117,16 +149,18 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
                 rel_btn = (LinearLayout.LayoutParams) card1IV.getLayoutParams();
                 if (!selected1 && cribSize < 2) {
                     selected1 =true;
-                    crib.addCard(card1);
+                    //crib.addCard(card1);
                     cribSize++;
-                    hand.removeCard(card1);
+                    //hand.removeCard(card1);
                     rel_btn.topMargin = 0;
+                    cribCardPos.add(0);
                 } else if (selected1) {
                     selected1 =false;
-                    crib.removeCard(card1);
-                    hand.addCard(card1);
+                    //crib.removeCard(card1);
+                    //hand.addCard(card1);
                     cribSize--;
                     rel_btn.topMargin = margin;
+                    cribCardPos.remove(0);
                 }
                 card1IV.setLayoutParams(rel_btn);
                 break;
@@ -134,90 +168,100 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
                 rel_btn = (LinearLayout.LayoutParams) card2IV.getLayoutParams();
                 if (!selected2 && cribSize < 2) {
                     selected2 =true;
-                    crib.addCard(card2);
+                    //crib.addCard(card2);
                     cribSize++;
-                    hand.removeCard(card2);
+                   // hand.removeCard(card2);
                     rel_btn.topMargin = 0;
                     card2IV.setLayoutParams(rel_btn);
+                    cribCardPos.add(1);
                 } else if (selected2) {
                     selected2 =false;
-                    crib.removeCard(card2);
-                    hand.addCard(card2);
+                    //crib.removeCard(card2);
+                    //hand.addCard(card2);
                     cribSize--;
                     rel_btn.topMargin = margin;
                     card2IV.setLayoutParams(rel_btn);
+                    cribCardPos.remove(1);
                 }
                 break;
             case R.id.cardThreeIV:
                 rel_btn = (LinearLayout.LayoutParams) card3IV.getLayoutParams();
                 if (!selected3 && cribSize < 2) {
                     selected3 =true;
-                    crib.addCard(card3);
+                    //crib.addCard(card3);
                     cribSize++;
-                    hand.removeCard(card3);
+                    //hand.removeCard(card3);
                     rel_btn.topMargin = 0;
                     card3IV.setLayoutParams(rel_btn);
+                    cribCardPos.add(2);
                 } else if (selected3) {
                     selected3 =false;
-                    crib.removeCard(card3);
-                    hand.addCard(card3);
+                    //crib.removeCard(card3);
+                    //hand.addCard(card3);
                     cribSize--;
                     rel_btn.topMargin = margin;
                     card3IV.setLayoutParams(rel_btn);
+                    cribCardPos.remove(2);
                 }
                 break;
             case R.id.cardFourIV:
                 rel_btn = (LinearLayout.LayoutParams) card4IV.getLayoutParams();
                 if (!selected4 && cribSize < 2) {
                     selected4 =true;
-                    crib.addCard(card4);
+                    //crib.addCard(card4);
                     cribSize++;
-                    hand.removeCard(card4);
+                    //hand.removeCard(card4);
                     rel_btn.topMargin = 0;
                     card4IV.setLayoutParams(rel_btn);
+                    cribCardPos.add(3);
                 } else if (selected4) {
                     selected4 =false;
-                    crib.removeCard(card4);
-                    hand.addCard(card4);
+                    //crib.removeCard(card4);
+                    //hand.addCard(card4);
                     cribSize--;
                     rel_btn.topMargin = margin;
                     card4IV.setLayoutParams(rel_btn);
+                    cribCardPos.remove(3);
                 }
                 break;
             case R.id.cardFiveIV:
                 rel_btn = (LinearLayout.LayoutParams) card5IV.getLayoutParams();
                 if (!selected5 && cribSize < 2) {
                     selected5 =true;
-                    crib.addCard(card5);
+                    //crib.addCard(card5);
                     cribSize++;
-                    hand.removeCard(card5);
+                    //hand.removeCard(card5);
                     rel_btn.topMargin = 0;
                     card5IV.setLayoutParams(rel_btn);
+                    cribCardPos.add(4);
                 } else if (selected5) {
                     selected5 =false;
-                    crib.removeCard(card5);
-                    hand.addCard(card5);
+                    //crib.removeCard(card5);
+                    //hand.addCard(card5);
                     cribSize--;
                     rel_btn.topMargin = margin;
                     card5IV.setLayoutParams(rel_btn);
+                    cribCardPos.remove(4);
                 }
                 break;
             case R.id.cardSixIV:
                 rel_btn = (LinearLayout.LayoutParams) card6IV.getLayoutParams();
                 if (!selected6 && cribSize < 2) {
                     selected6 =true;
-                    crib.addCard(card6);
+                    //crib.addCard(card6);
                     cribSize++;
-                    hand.removeCard(card6);
+                    //hand.removeCard(card6);
                     rel_btn.topMargin = 0;
                     card6IV.setLayoutParams(rel_btn);
+                    cribCardPos.add(5);
                 } else if (selected6) {
                     selected6 =false;
-                    crib.removeCard(card6);
-                    hand.addCard(card6);
+                    //crib.removeCard(card6);
+                    //hand.addCard(card6);
                     cribSize--;
                     rel_btn.topMargin = margin;
                     card6IV.setLayoutParams(rel_btn);
+                    cribCardPos.remove(5);
                 }
                 break;
         }
