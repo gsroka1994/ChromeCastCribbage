@@ -1,5 +1,6 @@
 package cs407.chromecastcribbage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -81,8 +82,7 @@ public class Find_Dealer_Activity extends AppCompatActivity implements GameManag
             Intent intent = new Intent(this, Deal_Activity.class);
             startActivity(intent);
         } else if (message.has("sameHand")){
-            Intent intent = new Intent(this, Find_Dealer_Activity.class);
-            startActivity(intent);
+            recreate();
         }
     }
 

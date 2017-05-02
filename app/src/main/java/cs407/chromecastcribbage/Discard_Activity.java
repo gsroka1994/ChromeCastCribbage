@@ -279,8 +279,13 @@ public class Discard_Activity extends AppCompatActivity implements GameManagerCl
         if(message.has("dealer")){
             try {
                 dealer = message.getString("dealer");
+                String yourName = message.getString("yourName");
                 TextView msg = (TextView) findViewById(R.id.discardMsg);
-                msg.setText("Select two cards for " + dealer + "'s crib");
+                if(dealer.equals(yourName)){
+                    msg.setText("Select two cards for your crib");
+                } else{
+                    msg.setText("Select two cards for " + dealer + "'s crib");
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
