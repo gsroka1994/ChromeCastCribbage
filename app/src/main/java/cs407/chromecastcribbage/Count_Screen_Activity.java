@@ -166,11 +166,13 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
 
                 String countString = Counter.count(cribHand);
                 String[] score = countString.split("\n");
+                String sendBreakdown = "";
                 String breakdown1 = "";
                 String breakdown2 = "";
                 int counter = 0;
                 for (String line : score) {
                     if (!line.endsWith("0") && !line.startsWith("Total Score: ")) {
+                        sendBreakdown = sendBreakdown + line + ", ";
                         if (counter < 5) {
                             breakdown1 = breakdown1 + line + "\n";
                         } else {
@@ -179,11 +181,14 @@ public class Count_Screen_Activity extends AppCompatActivity implements GameMana
                     }
                 }
                 String[] count = score[9].split("Total Score: ");
+                if(sendBreakdown.length()>0){
+                    sendBreakdown = sendBreakdown.substring(0,sendBreakdown.length()-1);
+                }
 
                 JSONObject jsonMessage = new JSONObject();
                 try {
                     jsonMessage.put("crib", "Yes");
-                    jsonMessage.put("handCountString", breakdown1 + breakdown2);
+                    jsonMessage.put("handCountString", sendBreakdown);
                     jsonMessage.put("handCount", count[1]);
                 } catch (JSONException e) {
                     Log.e("json", "Error creating JSON message", e);

@@ -258,6 +258,17 @@ public class Pegging_Activity extends AppCompatActivity implements GameManagerCl
                 return;
             }
             Welcome_Activity.mCastConnectionManager.getGameManagerClient().sendGameMessage(jsonMessage);
+        } else if (message.has("winner")) {
+            String winner = null;
+            try {
+                winner = message.getString("winner");
+                Intent intent = new Intent(this, Winner_Activity.class);
+                intent.putExtra("winner", winner);
+                startActivity(intent);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
